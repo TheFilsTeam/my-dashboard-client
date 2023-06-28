@@ -11,8 +11,8 @@ import {
 	Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import authService from '../services/auth.service';
 
 export default function CreateAccount() {
 	const navigate = useNavigate();
@@ -33,8 +33,7 @@ export default function CreateAccount() {
 		const { email, name, password } = form.values;
 
 		console.log(email, name, password);
-		axios
-			.post('http://localhost:5005/auth/signup', { email, name, password })
+		authService.signup({ email, name, password })
 			.then((response) => {
 				console.log(response.data);
 				navigate('/login');

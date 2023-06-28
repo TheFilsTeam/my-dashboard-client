@@ -11,9 +11,14 @@ import {
 	Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import authService from '../services/auth.service';
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 
 export default function SignIn() {
+	const { storeToken, authenticateUser } = useContext(AuthContext);
+	const navigate = useNavigate();
 	const form = useForm({
 		initialValues: {
 			email: '',
@@ -27,14 +32,18 @@ export default function SignIn() {
 
 	const signIn = (e) => {
 		e.preventDefault();
-		// TODO: login
-		console.log(form.values);
-		const { email, password, name } = form.values;
-		axios
-			.post('http://localhost:5005/auth/login', { email, password })
+		const { email, password } = form.values;
+		authService.login({ email, password })
 			.then((response) => {
 				console.log(response.data);
-				localStorage.setItem('authToken', response.data.token);
+				storeToken(response.data.authToken);
+				authenticateUser();
+				navigate('/');
+			})
+			.catch((error) => {
+				const errorDescription = error.response.data.message;
+				// setErrorMessage(errorDescription);
+				console.log(errorDescription);
 			});
 	};
 
