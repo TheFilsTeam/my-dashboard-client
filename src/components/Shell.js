@@ -12,7 +12,7 @@ import {
 	useMantineTheme,
 } from '@mantine/core';
 import { NavbarContent } from './NavbarContent';
-import SignIn from './../pages/SignIn';
+import { Outlet } from 'react-router-dom';
 
 export default function Shell() {
 	const theme = useMantineTheme();
@@ -62,7 +62,7 @@ export default function Shell() {
 				</Header>
 			}
 		>
-			<SignIn />
+			<Outlet />
 		</AppShell>
 	);
 }
