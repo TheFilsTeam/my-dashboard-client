@@ -12,6 +12,7 @@ import {
 	useMantineTheme,
 } from '@mantine/core';
 import { NavbarContent } from './NavbarContent';
+import SignIn from './../pages/SignIn';
 
 export default function Shell() {
 	const theme = useMantineTheme();
@@ -61,7 +62,7 @@ export default function Shell() {
 				</Header>
 			}
 		>
-			<Text>Resize app to see responsive navbar in action</Text>
+			<SignIn />
 		</AppShell>
 	);
 }
