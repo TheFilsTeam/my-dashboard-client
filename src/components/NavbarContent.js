@@ -92,13 +92,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-	{ link: '', label: 'Home', icon: IconHome },
+	{ link: '/', label: 'Home', icon: IconHome },
 	// { link: '', label: 'Billing', icon: IconReceipt2 },
 	// { link: '', label: 'Security', icon: IconFingerprint },
 	// { link: '', label: 'SSH Keys', icon: IconKey },
 	// { link: '', label: 'Databases', icon: IconDatabaseImport },
 	// { link: '', label: 'Authentication', icon: Icon2fa },
-	{ link: '', label: 'Settings', icon: IconSettings },
+	{ link: '/settings', label: 'Settings', icon: IconSettings },
 ];
 
 export function NavbarContent() {
