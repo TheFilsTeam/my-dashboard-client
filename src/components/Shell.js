@@ -39,7 +39,7 @@ export default function Shell() {
 			} */
 			footer={
 				<Footer height={70} p="md">
-					Application footer
+					Made with love by the Fils Team ( Filipe Ferreira & Philippe Miossec)
 				</Footer>
 			}
 			header={
