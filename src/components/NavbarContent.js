@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
 	createStyles,
 	Navbar,
@@ -19,6 +19,7 @@ import {
 	IconLogout,
 	IconHome,
 } from '@tabler/icons-react';
+import { AuthContext } from '../context/auth.context';
 /* import { MantineLogo } from '@mantine/ds'; */
 
 const useStyles = createStyles((theme) => ({
@@ -101,6 +102,7 @@ const data = [
 ];
 
 export function NavbarContent() {
+	const { logOutUser } = useContext(AuthContext);
 	const { classes, cx } = useStyles();
 	const [active, setActive] = useState('Billing');
 
@@ -135,19 +137,20 @@ export function NavbarContent() {
 				style={{ marginBottom: '1rem' }}
 				className={classes.footer}
 			>
-				<a
+				{/* <a
 					href="#"
 					className={classes.link}
 					onClick={(event) => event.preventDefault()}
 				>
 					<IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
 					<span>Change account</span>
-				</a>
+				</a> */}
 
 				<a
 					href="#"
 					className={classes.link}
-					onClick={(event) => event.preventDefault()}
+					onClick={(event) => { event.preventDefault();
+						logOutUser();}}
 				>
 					<IconLogout className={classes.linkIcon} stroke={1.5} />
 					<span>Logout</span>
