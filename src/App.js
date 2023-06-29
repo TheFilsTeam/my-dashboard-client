@@ -28,23 +28,16 @@ function App() {
 						</IsAnon>
 					}
 				/>
-				<Route path="/" element={<Shell />}>
-					<Route
-						path="/"
-						element={
-							<IsPrivate>
-								<Home />
-							</IsPrivate>
-						}
-					/>
-					<Route
-						path="/settings"
-						element={
-							<IsPrivate>
-								<Settings />
-							</IsPrivate>
-						}
-					/>
+				<Route
+					path="/"
+					element={
+						<IsPrivate>
+							<Shell />
+						</IsPrivate>
+					}
+				>
+					<Route path="/" element={<Home />} />
+					<Route path="/settings" element={<Settings />} />
 				</Route>
 			</Routes>
 		</div>
