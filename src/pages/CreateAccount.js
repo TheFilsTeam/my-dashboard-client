@@ -11,7 +11,7 @@ import {
 	Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import authService from '../services/auth.service';
 import { useState } from 'react';
 
@@ -61,10 +61,13 @@ export default function CreateAccount() {
 				>
 					Join us!
 				</Title>
-				<Text color="dimmed" size="sm" align="center" mt={5}>
-					Boost your productivity today.
-				</Text>
 
+				<Text color="dimmed" size="sm" align="center" mt={5}>
+					Already have an account?{' '}
+					<Link style={{ textDecoration: 'none' }} to="/login">
+						Login
+					</Link>
+				</Text>
 				<Paper withBorder shadow="md" p={30} mt={30} radius="md">
 					{errorMessage && (
 						<Text size="sm" color="red">

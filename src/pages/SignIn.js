@@ -11,7 +11,7 @@ import {
 	Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authService from '../services/auth.service';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
@@ -65,9 +65,9 @@ export default function SignIn() {
 				</Title>
 				<Text color="dimmed" size="sm" align="center" mt={5}>
 					Do not have an account yet?{' '}
-					<Anchor size="sm" component="button">
+					<Link style={{ textDecoration: 'none' }} to="/create-account">
 						Create account
-					</Anchor>
+					</Link>
 				</Text>
 
 				<Paper withBorder shadow="md" p={30} mt={30} radius="md">
