@@ -7,8 +7,14 @@ import IsPrivate from './components/IsPrivate';
 import IsAnon from './components/IsAnon';
 import Settings from './pages/Settings';
 import Home from './pages/Home';
+import { useState, useRef } from 'react';
 
 function App() {
+	const [minutesLeft, setMinutesLeft] = useState(0);
+	const [secondsLeft, setSecondsLeft] = useState(0);
+	const [timerStatus, setTimerStatus] = useState('stopped');
+	const timerRef = useRef(null);
+
 	return (
 		<div className="App">
 			<Routes>
@@ -36,7 +42,20 @@ function App() {
 						</IsPrivate>
 					}
 				>
-					<Route path="/" element={<Home />} />
+					<Route
+						path="/"
+						element={
+							<Home
+								minutesLeft={minutesLeft}
+								setMinutesLeft={setMinutesLeft}
+								secondsLeft={secondsLeft}
+								setSecondsLeft={setSecondsLeft}
+								timerStatus={timerStatus}
+								setTimerStatus={setTimerStatus}
+								timerRef={timerRef}
+							/>
+						}
+					/>
 					<Route path="/settings" element={<Settings />} />
 				</Route>
 			</Routes>

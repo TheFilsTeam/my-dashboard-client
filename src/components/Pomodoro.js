@@ -1,49 +1,45 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Text, Paper, NumberInput, Center, Button, Flex } from '@mantine/core';
 
-export default function Pomodoro() {
-	const [minutesLeft, setMinutesLeft] = useState(0);
-	const [secondsLeft, setSecondsLeft] = useState(0);
-	const [timerStatus, setTimerStatus] = useState('stopped');
-	const timerRef = useRef(null);
-
+export default function Pomodoro(props) {
+	console.log(props);
 	useEffect(() => {
-		if (timerStatus === 'running') {
+		if (props.timerStatus === 'running') {
 			const startTime = Date.now();
-			timerRef.current = setInterval(() => {
+			props.timerRef.current = setInterval(() => {
 				const elapsedTime = Math.round((Date.now() - startTime) / 1000);
-				const remainingTime = minutesLeft * 60 - elapsedTime;
+				const remainingTime = props.minutesLeft * 60 - elapsedTime;
 				if (remainingTime >= 0) {
-					setSecondsLeft(remainingTime % 60);
-					setMinutesLeft(Math.floor(remainingTime / 60));
+					props.setSecondsLeft(remainingTime % 60);
+					props.setMinutesLeft(Math.floor(remainingTime / 60));
 				} else {
-					clearInterval(timerRef.current);
-					setTimerStatus('stopped');
+					clearInterval(props.timerRef.current);
+					props.setTimerStatus('stopped');
 					alert('Time is up!');
 				}
 			}, 1000);
 		}
 		return () => {
-			clearInterval(timerRef.current);
+			clearInterval(props.timerRef.current);
 		};
-	}, [timerStatus]);
+	}, [props.timerStatus]);
 
 	const handleStartTimer = () => {
-		if (minutesLeft > 0) {
-			setTimerStatus('running');
+		if (props.minutesLeft > 0) {
+			props.setTimerStatus('running');
 		} else {
 			alert('Please enter a valid number of minutes.');
 		}
 	};
 
 	const handleStopTimer = () => {
-		setTimerStatus('stopped');
+		props.setTimerStatus('stopped');
 	};
 
 	const handleResetTimer = () => {
-		setTimerStatus('stopped');
-		setSecondsLeft(0);
-		setMinutesLeft(0);
+		props.setTimerStatus('stopped');
+		props.setSecondsLeft(0);
+		props.setMinutesLeft(0);
 	};
 
 	return (
@@ -70,8 +66,8 @@ export default function Pomodoro() {
 							maw={70}
 							label="Minutes"
 							defaultValue={0}
-							value={minutesLeft}
-							onChange={(e) => setMinutesLeft(e)}
+							value={props.minutesLeft}
+							onChange={(e) => props.setMinutesLeft(e)}
 							min={0}
 							max={60}
 							parser={(value) => value.replace(/[^\d]/g, '')}
@@ -81,8 +77,8 @@ export default function Pomodoro() {
 							maw={70}
 							label="Seconds"
 							defaultValue={0}
-							value={secondsLeft}
-							onChange={(e) => setSecondsLeft(e)}
+							value={props.secondsLeft}
+							onChange={(e) => props.setSecondsLeft(e)}
 							min={0}
 							max={60}
 							parser={(value) => value.replace(/[^\d]/g, '')}
