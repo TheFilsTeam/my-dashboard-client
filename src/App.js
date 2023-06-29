@@ -12,11 +12,39 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
+				<Route
+					path="/login"
+					element={
+						<IsAnon>
+							<SignIn />
+						</IsAnon>
+					}
+				/>
+				<Route
+					path="/create-account"
+					element={
+						<IsAnon>
+							<CreateAccount />
+						</IsAnon>
+					}
+				/>
 				<Route path="/" element={<Shell />}>
-					<Route path="/" element={<IsPrivate><Home /></IsPrivate>} />
-					<Route path="/login" element={<IsAnon><SignIn /></IsAnon>} />
-					<Route path="/create-account" element={<IsAnon><CreateAccount /></IsAnon>} />
-					<Route path="/settings" element={<IsPrivate><Settings /></IsPrivate>} />
+					<Route
+						path="/"
+						element={
+							<IsPrivate>
+								<Home />
+							</IsPrivate>
+						}
+					/>
+					<Route
+						path="/settings"
+						element={
+							<IsPrivate>
+								<Settings />
+							</IsPrivate>
+						}
+					/>
 				</Route>
 			</Routes>
 		</div>
