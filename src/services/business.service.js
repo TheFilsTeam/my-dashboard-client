@@ -19,14 +19,14 @@ class BusinessService {
     });
   }
 
-  // POST /api/SOMETHING
-  createSOMETHING = requestBody => {
-    return this.api.post('/api/SOMETHING', requestBody);
+  // POST /api/tasks
+  createTask = requestBody => {
+    return this.api.post('/api/tasks', requestBody);
   };
 
-  // GET /api/SOMETHING
-  getAllSOMETHING = () => {
-    return this.api.get('/api/SOMETHING');
+  // GET /api/tasks
+  getAllTasks = () => {
+    return this.api.get('/api/tasks');
   };
 
   // GET /api/SOMETHING/:id
@@ -34,9 +34,20 @@ class BusinessService {
     return this.api.get(`/api/SOMETHING/${id}`);
   };
 
-  // PUT /api/SOMETHING/:id
-  updateSOMETHING = (id, requestBody) => {
-    return this.api.put(`/api/SOMETHING/${id}`, requestBody);
+  setTaskDone = id => {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+
+    return this.updateTask(id, {finishedDate: date})
+}
+
+setTaskInProgress = id => {
+    return this.updateTask(id, {finishedDate: null})
+  }
+
+  // PUT /api/task/:id
+  updateTask = (id, requestBody) => {
+    return this.api.put(`/api/tasks/${id}`, requestBody);
   };
 
   // DELETE /api/SOMETHING/:id
@@ -46,6 +57,6 @@ class BusinessService {
 }
 
 // Create one instance object
-const projectsService = new BusinessService();
+const businessService = new BusinessService();
 
-export default projectsService;
+export default businessService;

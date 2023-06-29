@@ -1,5 +1,5 @@
 import { Container } from '@mantine/core';
-
+import ToDoList from "../components/ToDoList";
 import Pomodoro from '../components/Pomodoro';
 
 export default function Home(props) {
@@ -15,6 +15,7 @@ export default function Home(props) {
 				setTimerStatus={props.setTimerStatus}
 				timerRef={props.timerRef}
 			/>
+			<ToDoList />
 		</Container>
 	);
 }
