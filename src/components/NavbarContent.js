@@ -20,6 +20,7 @@ import {
 	IconHome,
 } from '@tabler/icons-react';
 import { AuthContext } from '../context/auth.context';
+import { useNavigate } from 'react-router';
 /* import { MantineLogo } from '@mantine/ds'; */
 
 const useStyles = createStyles((theme) => ({
@@ -105,6 +106,7 @@ export function NavbarContent() {
 	const { logOutUser } = useContext(AuthContext);
 	const { classes, cx } = useStyles();
 	const [active, setActive] = useState('Billing');
+	const navigate = useNavigate();
 
 	const links = data.map((item) => (
 		<a
@@ -116,6 +118,7 @@ export function NavbarContent() {
 			onClick={(event) => {
 				event.preventDefault();
 				setActive(item.label);
+				navigate(item.link);
 			}}
 		>
 			<item.icon className={classes.linkIcon} stroke={1.5} />
