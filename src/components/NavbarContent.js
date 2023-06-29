@@ -103,7 +103,7 @@ const data = [
 ];
 
 export function NavbarContent() {
-	const { logOutUser } = useContext(AuthContext);
+	const { user, logOutUser } = useContext(AuthContext);
 	const { classes, cx } = useStyles();
 	const [active, setActive] = useState('Billing');
 	const navigate = useNavigate();
@@ -131,7 +131,7 @@ export function NavbarContent() {
 			<Navbar.Section grow>
 				<Group className={classes.header} position="apart">
 					{/* <MantineLogo size={28} /> */}
-					<Code sx={{ fontWeight: 700 }}>Hello USERTODO</Code>
+					<Code sx={{ fontWeight: 700 }}>Hello {user.name}</Code>
 				</Group>
 				{links}
 			</Navbar.Section>
