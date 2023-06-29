@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Text, Paper, NumberInput, Center, Button, Flex } from '@mantine/core';
+import { Paper, NumberInput, Center, Button, Flex } from '@mantine/core';
 
 export default function Pomodoro(props) {
-	console.log(props);
 	useEffect(() => {
 		if (props.timerStatus === 'running') {
 			const startTime = Date.now();
