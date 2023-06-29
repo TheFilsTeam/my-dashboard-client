@@ -1,3 +1,12 @@
+import { Container } from '@mantine/core';
+
+import Pomodoro from '../components/Pomodoro';
+
 export default function Home() {
-    return (<h1>restricted home page 👍</h1>);
+	return (
+		<Container fluid>
+			<h1>restricted home page 👍</h1>
+			<Pomodoro />
+		</Container>
+	);
 }
