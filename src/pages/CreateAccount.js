@@ -13,9 +13,13 @@ import {
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 import authService from '../services/auth.service';
+import { useState } from 'react';
 
 export default function CreateAccount() {
+	const [errorMessage, setErrorMessage] = useState(null);
+
 	const navigate = useNavigate();
+
 	const form = useForm({
 		initialValues: {
 			email: '',
@@ -33,12 +37,16 @@ export default function CreateAccount() {
 		const { email, name, password } = form.values;
 
 		console.log(email, name, password);
-		authService.signup({ email, name, password })
+		authService
+			.signup({ email, name, password })
 			.then((response) => {
 				console.log(response.data);
 				navigate('/login');
 			})
-			.catch((e) => console.log('error creating account', e));
+			.catch((e) => {
+				setErrorMessage(e.response.data.message);
+				console.log('error creating account', e.response);
+			});
 	};
 
 	return (
@@ -58,6 +66,11 @@ export default function CreateAccount() {
 				</Text>
 
 				<Paper withBorder shadow="md" p={30} mt={30} radius="md">
+					{errorMessage && (
+						<Text size="sm" color="red">
+							{errorMessage}
+						</Text>
+					)}
 					<TextInput
 						label="Email"
 						placeholder="your@email.com"

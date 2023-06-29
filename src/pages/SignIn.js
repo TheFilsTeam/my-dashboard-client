@@ -11,13 +11,15 @@ import {
 	Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import authService from '../services/auth.service';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 
 export default function SignIn() {
 	const { storeToken, authenticateUser } = useContext(AuthContext);
+	const [errorMessage, setErrorMessage] = useState(null);
+
 	const navigate = useNavigate();
 	const form = useForm({
 		initialValues: {
@@ -33,15 +35,17 @@ export default function SignIn() {
 	const signIn = (e) => {
 		e.preventDefault();
 		const { email, password } = form.values;
-		authService.login({ email, password })
+		authService
+			.login({ email, password })
 			.then((response) => {
 				console.log(response.data);
 				storeToken(response.data.authToken);
 				authenticateUser();
 				navigate('/');
 			})
-			.catch((error) => {
-				const errorDescription = error.response.data.message;
+			.catch((e) => {
+				setErrorMessage(e.response.data.message);
+				const errorDescription = e.response.data.message;
 				// setErrorMessage(errorDescription);
 				console.log(errorDescription);
 			});
@@ -67,6 +71,11 @@ export default function SignIn() {
 				</Text>
 
 				<Paper withBorder shadow="md" p={30} mt={30} radius="md">
+					{errorMessage && (
+						<Text size="sm" color="red">
+							{errorMessage}
+						</Text>
+					)}
 					<TextInput
 						label="Email"
 						placeholder="your@email.com"
