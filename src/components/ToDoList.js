@@ -26,13 +26,14 @@ export default function ToDoList() {
         console.log("id", id, checked);
         businessService.updateTaskStatus(id, checked)
            .then(response => {
-                console.log("Changed state value", response.data);
+                const updatedTask = response.data;
+                setTasks(tasks.map(t => t._id === updatedTask._id ? updatedTask : t));
+                console.log("Changed state value", );
             });
     }
 
     return(
-        <section>
-
+        <section id="todo-list">
             <Input
             label="Add a new task"
             placeholder="Title of the new task"
@@ -45,21 +46,13 @@ export default function ToDoList() {
             autoComplete="nope"
         />
 
-    {/* //           <TextInput
-    //     label="Add a new task"
-    //     placeholder="Title of the new task"
-    //     required
-    //     // classNames={classes}
-    //     value={value}
-    //     onChange={(event) => setValue(event.currentTarget.value)}
-    //     // onFocus={() => setFocused(true)}
-    //     // onBlur={() => setFocused(false)}
-    //     mt="md"
-    //     autoComplete="nope"
-    //   /> */}
         <ul>
-            {tasks.map(t => <li><Checkbox value={t.finishedDate ? "on" : "off"}
-             label={t.title} onChange={e => toggleTaskState(t._id, e.target.checked)} /></li>)}
+            {tasks.map(t => <li key={t._id}>
+            <Checkbox checked={t.finishedDate ? "true" : ""}
+                label={t.title}
+                className={t.finishedDate ? "done" : "in-progress"}
+                onChange={e => toggleTaskState(t._id, e.target.checked)} />
+            </li>)}
         </ul>
         </section>
     )
