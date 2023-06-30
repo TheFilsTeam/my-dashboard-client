@@ -34,12 +34,9 @@ class BusinessService {
     return this.api.get(`/api/SOMETHING/${id}`);
   };
 
-  setTaskDone = id => {
-    const date = new Date();
-    date.setHours(0, 0, 0, 0);
-
-    return this.updateTask(id, {finishedDate: date})
-}
+  updateTaskStatus = (id, done) => {
+    return this.api.put(`/api/tasks/${id}/status`, {done});
+  };
 
 setTaskInProgress = id => {
     return this.updateTask(id, {finishedDate: null})

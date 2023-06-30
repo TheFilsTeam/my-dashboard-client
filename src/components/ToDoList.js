@@ -24,9 +24,7 @@ export default function ToDoList() {
 
     const toggleTaskState = (id, checked) => {
         console.log("id", id, checked);
-        (checked
-            ? businessService.setTaskDone(id)
-            : businessService.setTaskDone(id))
+        businessService.updateTaskStatus(id, checked)
            .then(response => {
                 console.log("Changed state value", response.data);
             });
