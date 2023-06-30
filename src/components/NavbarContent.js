@@ -8,14 +8,7 @@ import {
 	rem,
 } from '@mantine/core';
 import {
-	IconBellRinging,
-	IconFingerprint,
-	IconKey,
 	IconSettings,
-	Icon2fa,
-	IconDatabaseImport,
-	IconReceipt2,
-	IconSwitchHorizontal,
 	IconLogout,
 	IconHome,
 } from '@tabler/icons-react';
@@ -150,7 +143,7 @@ export function NavbarContent() {
 				</a> */}
 
 				<a
-					href="#"
+					href="/logout"
 					className={classes.link}
 					onClick={(event) => {
 						event.preventDefault();

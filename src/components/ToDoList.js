@@ -1,4 +1,4 @@
-import { Paper, Checkbox, Input, Title, TextInput, createStyles, rem } from "@mantine/core";
+import { Paper, Checkbox, Input } from "@mantine/core";
 import { useEffect, useState } from "react";
 import taskService from "../services/task.service";
 import { IconTrash } from "@tabler/icons-react";

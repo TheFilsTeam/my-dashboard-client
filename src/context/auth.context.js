@@ -58,6 +58,7 @@ function AuthProviderWrapper(props) {
   
   useEffect(() => {                              
     authenticateUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* 
