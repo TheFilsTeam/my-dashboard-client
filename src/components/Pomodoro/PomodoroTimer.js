@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Button, Flex, NumberInput, Text } from '@mantine/core';
+import React from 'react';
+import { Flex, Text } from '@mantine/core';
 
 export default function PomodoroTimer(props) {
 	useEffect(() => {
@@ -12,14 +12,14 @@ export default function PomodoroTimer(props) {
 				} else {
 					clearInterval(props.timerRef.current);
 					props.setTimerStatus('stopped');
-					if (Notification.permission === "granted") {
+					if (Notification.permission === 'granted') {
 						var options = {
 							body: 'Please make a break!',
 							icon: './hourglass.png',
-						  };
+						};
 						new Notification('Time is up!', options);
 					} else {
-						alert("Please make a break!");
+						alert('Please make a break!');
 					}
 				}
 			}, 1000);
@@ -68,77 +68,7 @@ export default function PomodoroTimer(props) {
 			direction="column"
 			wrap="wrap"
 		>
-			<Flex
-				mih={50}
-				gap="md"
-				m="sm"
-				justify="center"
-				align="center"
-				direction="row"
-				wrap="wrap"
-			>
-				<Button miw={80} onClick={() => addToTimer(5)}>
-					+5m
-				</Button>
-				<Button miw={80} onClick={() => addToTimer(10)}>
-					+10m
-				</Button>
-				<Button miw={80} onClick={() => addToTimer(15)}>
-					+15m
-				</Button>
-			</Flex>
-			<Flex
-				mih={50}
-				gap="md"
-				m="sm"
-				justify="center"
-				align="center"
-				direction="row"
-				wrap="wrap"
-			>
-				<NumberInput
-					maw={70}
-					label="Minutes"
-					defaultValue={0}
-					value={props.minutesLeft}
-					onChange={(e) => props.setRemainingSeconds(e * 60)}
-					min={0}
-					max={60}
-					parser={(value) => value.replace(/[^\d]/g, '')}
-					formatter={(value) => value}
-				/>
-				<NumberInput
-					maw={70}
-					label="Seconds"
-					defaultValue={0}
-					value={props.secondsLeft}
-					onChange={(e) => props.setRemainingSeconds(e)}
-					min={0}
-					max={60}
-					parser={(value) => value.replace(/[^\d]/g, '')}
-					formatter={(value) => value}
-				/>
-				<Text>{timeFormat(props.remainingSeconds)}</Text>
-			</Flex>
-
-			<Flex
-				mih={50}
-				justify="center"
-				align="center"
-				direction="row"
-				wrap="wrap"
-				gap="md"
-			>
-				<Button variant="filled" onClick={handleStartTimer}>
-					Start timer
-				</Button>
-				<Button color="red" variant="filled" onClick={handleStopTimer}>
-					Stop timer
-				</Button>
-				<Button color="red" variant="outline" onClick={handleResetTimer}>
-					Reset timer
-				</Button>
-			</Flex>
+			<Text>{props.timeFormat(props.remainingSeconds)}</Text>
 		</Flex>
 	);
 }
