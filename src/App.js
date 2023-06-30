@@ -16,10 +16,9 @@ import Settings from './pages/Settings';
 import Home from './pages/Home';
 
 function App() {
-	const [minutesLeft, setMinutesLeft] = useState(0);
-	const [secondsLeft, setSecondsLeft] = useState(0);
 	const [timerStatus, setTimerStatus] = useState('stopped');
 	const timerRef = useRef(null);
+	const [remainingSeconds, setRemainingSeconds] = useState(0);
 
 	return (
 		<div className="App">
@@ -53,10 +52,8 @@ function App() {
 							path="/"
 							element={
 								<Home
-									minutesLeft={minutesLeft}
-									setMinutesLeft={setMinutesLeft}
-									secondsLeft={secondsLeft}
-									setSecondsLeft={setSecondsLeft}
+									remainingSeconds={remainingSeconds}
+									setRemainingSeconds={setRemainingSeconds}
 									timerStatus={timerStatus}
 									setTimerStatus={setTimerStatus}
 									timerRef={timerRef}
