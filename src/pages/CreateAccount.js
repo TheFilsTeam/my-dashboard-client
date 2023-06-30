@@ -73,12 +73,15 @@ export default function CreateAccount() {
 					)}
 					<TextInput
 						label="Email"
+						name="email"
+						type="email"
 						placeholder="your@email.com"
 						{...form.getInputProps('email')}
 						required
 					/>
 					<TextInput
 						label="Name"
+						name="username"
 						placeholder="Your name"
 						{...form.getInputProps('name')}
 						required
