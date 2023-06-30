@@ -1,10 +1,7 @@
 import './App.css';
 
-import {
-	Routes,
-	Route,
-} from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
 import { MantineProvider } from '@mantine/core';
 
 import Shell from './components/Shell';
@@ -19,6 +16,33 @@ function App() {
 	const [timerStatus, setTimerStatus] = useState('stopped');
 	const timerRef = useRef(null);
 	const [remainingSeconds, setRemainingSeconds] = useState(0);
+
+	console.log(remainingSeconds);
+	//Timer function
+	useEffect(() => {
+		console.log('in use effect');
+		if (timerStatus === 'launching') {
+			console.log('Launching...', remainingSeconds);
+			setTimerStatus('running');
+			timerRef.current = setInterval(() => {
+				console.log('Ticking....Updating value....');
+				setRemainingSeconds((prevRemainingSeconds) => {
+					const newValue = prevRemainingSeconds - 1;
+					console.log('newValue', newValue);
+					return newValue;
+				});
+			}, 1000);
+		}
+		return () => {
+			/* clearInterval(timerRef.current); */
+		};
+	}, [timerStatus]);
+
+	if (timerStatus === 'running' && remainingSeconds <= 0) {
+		setTimerStatus('stopped');
+		alert('Time is up!');
+		clearInterval(timerRef.current);
+	}
 
 	return (
 		<div className="App">
@@ -44,7 +68,7 @@ function App() {
 						path="/"
 						element={
 							<IsPrivate>
-								<Shell />
+								<Shell remainingSeconds={remainingSeconds} />
 							</IsPrivate>
 						}
 					>

@@ -4,28 +4,9 @@ import PomodoroTimer from './Pomodoro/PomodoroTimer';
 import PomodoroControls from './Pomodoro/PomodoroControls';
 
 export default function Pomodoro(props) {
-	useEffect(() => {
-		if (props.timerStatus === 'running') {
-			props.timerRef.current = setInterval(() => {
-				if (props.remainingSeconds > 0) {
-					props.setRemainingSeconds(
-						(prevRemainingSeconds) => prevRemainingSeconds - 1
-					);
-				} else {
-					clearInterval(props.timerRef.current);
-					props.setTimerStatus('stopped');
-					alert('Time is up!');
-				}
-			}, 1000);
-		}
-		return () => {
-			clearInterval(props.timerRef.current);
-		};
-	}, [props.timerStatus, props.remainingSeconds]);
-
 	const handleStartTimer = () => {
 		if (props.remainingSeconds > 0) {
-			props.setTimerStatus('running');
+			props.setTimerStatus('launching');
 		} else {
 			alert('Please enter a valid number of minutes.');
 		}
@@ -46,19 +27,13 @@ export default function Pomodoro(props) {
 		}
 	};
 
-	const timeFormat = (s) => {
-		let minutes = Math.floor(s / 60);
-		let seconds = (s % 60).toString().padStart(2, '0');
-
-		return `${minutes}:${seconds}`;
-	};
 	return (
 		<Center>
 			<Paper maw={600} shadow="xs" p="md">
-				<PomodoroTimer
-					timeFormat={timeFormat}
+				{/* <PomodoroTimer
+					timeFormat={props.timeFormat}
 					remainingSeconds={props.remainingSeconds}
-				></PomodoroTimer>
+				></PomodoroTimer> */}
 				<PomodoroControls
 					addToTimer={addToTimer}
 					handleStartTimer={handleStartTimer}

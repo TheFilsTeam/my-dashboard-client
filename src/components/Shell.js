@@ -15,20 +15,24 @@ import { useDisclosure } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
 
 import { NavbarContent } from './NavbarContent';
-export default function Shell() {
+import PomodoroTimer from './Pomodoro/PomodoroTimer';
+
+export default function Shell(props) {
 	const theme = useMantineTheme();
 
 	//controls the navbar open/close
-	/* const isScreenSmall = useMediaQuery('(max-width: 48em )');  */ //hooks an event listener that returns true/false depending on the query param
+
 	const [openedNav, { toggle }] = useDisclosure(false, {
 		onOpen: () => console.log('Opened'),
 		onClose: () => console.log('Closed'),
 	}); //manages open/close state
-	/* 
-	console.log(toggle); */
-	/* if (!isScreenSmall) {
-		toggle.open();
-	} */
+
+	const timeFormat = (s) => {
+		let minutes = Math.floor(s / 60);
+		let seconds = (s % 60).toString().padStart(2, '0');
+
+		return `${minutes}:${seconds}`;
+	};
 
 	return (
 		<AppShell

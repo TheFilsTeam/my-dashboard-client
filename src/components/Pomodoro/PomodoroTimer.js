@@ -65,9 +65,10 @@ export default function PomodoroTimer(props) {
 			gap="md"
 			justify="center"
 			align="center"
-			direction="column"
+			direction="row"
 			wrap="wrap"
 		>
+			<Text>Pomodoro Timer:</Text>
 			<Text>{props.timeFormat(props.remainingSeconds)}</Text>
 		</Flex>
 	);

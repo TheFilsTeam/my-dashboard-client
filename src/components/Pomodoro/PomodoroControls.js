@@ -1,4 +1,4 @@
-import { Flex, Button, NumberInput, Text } from '@mantine/core';
+import { Flex, Button, NumberInput } from '@mantine/core';
 import React from 'react';
 
 export default function PomodoroControls(props) {
