@@ -7,9 +7,9 @@ export default function Pomodoro(props) {
 			const startTime = Date.now();
 			props.timerRef.current = setInterval(() => {
 				const elapsedTime = Math.round((Date.now() - startTime) / 1000);
-				const remainingTime = props.minutesLeft * 60 - elapsedTime;
-				if (remainingTime >= 0) {
-					props.setSecondsLeft(remainingTime % 60);
+				const remainingTime = props.secondsLeft - elapsedTime;
+				if (remainingTime >= 0 || props.minutesLeft > 0) {
+					props.setSecondsLeft(remainingTime);
 					props.setMinutesLeft(Math.floor(remainingTime / 60));
 				} else {
 					clearInterval(props.timerRef.current);
@@ -24,7 +24,7 @@ export default function Pomodoro(props) {
 	}, [props.timerStatus]);
 
 	const handleStartTimer = () => {
-		if (props.minutesLeft > 0) {
+		if (props.minutesLeft > 0 || props.secondsLeft > 0) {
 			props.setTimerStatus('running');
 		} else {
 			alert('Please enter a valid number of minutes.');
@@ -66,7 +66,7 @@ export default function Pomodoro(props) {
 							label="Minutes"
 							defaultValue={0}
 							value={props.minutesLeft}
-							onChange={(e) => props.setMinutesLeft(e)}
+							onChange={(e) => props.setSecondsLeft(e * 60)}
 							min={0}
 							max={60}
 							parser={(value) => value.replace(/[^\d]/g, '')}
