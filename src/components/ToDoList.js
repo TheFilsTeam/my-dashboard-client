@@ -1,7 +1,7 @@
-import { Checkbox, Input, TextInput, createStyles, rem } from "@mantine/core";
+import { Paper, Checkbox, Input, Title, TextInput, createStyles, rem } from "@mantine/core";
 import { useEffect, useState } from "react";
 import taskService from "../services/task.service";
-import { IconTrash, IconHome } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 
 export default function ToDoList() {
   const [title, setTitle] = useState("");
@@ -40,7 +40,8 @@ export default function ToDoList() {
   };
 
   return (
-    <section id="todo-list">
+    <Paper maw={600} shadow="xs" p="md" id="todo-list">
+      {/* <Title order={1}>Today to do list</Title> */}
       <Input
         id="add-task"
         label="Add a new task"
@@ -67,6 +68,6 @@ export default function ToDoList() {
           </li>
         ))}
       </ul>
-    </section>
+    </Paper>
   );
 }
