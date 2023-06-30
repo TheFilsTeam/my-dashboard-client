@@ -1,20 +1,35 @@
 import React from 'react';
-import { useState } from 'react';
+
 import {
 	AppShell,
 	Header,
-	Footer,
+	/* Footer, */
 	Text,
 	MediaQuery,
 	Burger,
 	useMantineTheme,
+	Collapse,
 } from '@mantine/core';
-import { NavbarContent } from './NavbarContent';
+import { useDisclosure } from '@mantine/hooks';
+
 import { Outlet } from 'react-router-dom';
 
+import { NavbarContent } from './NavbarContent';
 export default function Shell() {
 	const theme = useMantineTheme();
-	const [opened, setOpened] = useState(false);
+
+	//controls the navbar open/close
+	/* const isScreenSmall = useMediaQuery('(max-width: 48em )');  */ //hooks an event listener that returns true/false depending on the query param
+	const [openedNav, { toggle }] = useDisclosure(false, {
+		onOpen: () => console.log('Opened'),
+		onClose: () => console.log('Closed'),
+	}); //manages open/close state
+	/* 
+	console.log(toggle); */
+	/* if (!isScreenSmall) {
+		toggle.open();
+	} */
+
 	return (
 		<AppShell
 			styles={{
@@ -27,7 +42,7 @@ export default function Shell() {
 			}}
 			navbarOffsetBreakpoint="sm"
 			asideOffsetBreakpoint="sm"
-			navbar={<NavbarContent />}
+			/* navbar={<NavbarContent />} Added bellow */
 			/* aside={
 				<MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
 					<Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
@@ -35,20 +50,25 @@ export default function Shell() {
 					</Aside>
 				</MediaQuery>
 			} */
-			footer={
-				<Footer height={70} p="md">
-					Made with love by the Fils Team ( Filipe Ferreira & Philippe Miossec)
+			/* 	footer={
+				<Footer height={40} p="md">
+					<Container fluid>
+						<p>
+							Made with love by the Fils Team (Filipe Ferreira & Philippe
+							Miossec)
+						</p>
+					</Container>
 				</Footer>
-			}
+			} */
 			header={
 				<Header height={{ base: 50, md: 70 }} p="md">
 					<div
 						style={{ display: 'flex', alignItems: 'center', height: '100%' }}
 					>
-						<MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+						<MediaQuery /* largerThan="sm" styles={{ display: 'none' }} */>
 							<Burger
-								opened={opened}
-								onClick={() => setOpened((o) => !o)}
+								opened={openedNav}
+								onClick={toggle}
 								size="sm"
 								color={theme.colors.gray[6]}
 								mr="xl"
@@ -60,6 +80,14 @@ export default function Shell() {
 				</Header>
 			}
 		>
+			<Collapse
+				in={openedNav}
+				transitionDuration={100}
+				transitionTimingFunction="linear"
+			>
+				<NavbarContent />
+			</Collapse>
+
 			<Outlet />
 		</AppShell>
 	);

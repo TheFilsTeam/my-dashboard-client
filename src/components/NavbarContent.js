@@ -152,8 +152,10 @@ export function NavbarContent() {
 				<a
 					href="#"
 					className={classes.link}
-					onClick={(event) => { event.preventDefault();
-						logOutUser();}}
+					onClick={(event) => {
+						event.preventDefault();
+						logOutUser();
+					}}
 				>
 					<IconLogout className={classes.linkIcon} stroke={1.5} />
 					<span>Logout</span>
