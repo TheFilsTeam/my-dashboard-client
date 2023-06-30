@@ -75,6 +75,8 @@ export default function SignIn() {
 					)}
 					<TextInput
 						label="Email"
+						name="email"
+						type="email"
 						placeholder="your@email.com"
 						{...form.getInputProps('email')}
 						required
