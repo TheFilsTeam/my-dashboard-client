@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class BusinessService {
+class TaskService {
   constructor() {
     this.api = axios.create({
       baseURL: process.env.REACT_APP_SERVER_URL || 'http://localhost:5005'
@@ -29,16 +29,16 @@ class BusinessService {
     return this.api.get('/api/tasks');
   };
 
-  // GET /api/SOMETHING/:id
-  getSOMETHING = id => {
-    return this.api.get(`/api/SOMETHING/${id}`);
+  // GET /api/tasks/:id
+  getTasks = id => {
+    return this.api.get(`/api/tasks/${id}`);
   };
 
   updateTaskStatus = (id, done) => {
     return this.api.put(`/api/tasks/${id}/status`, {done});
   };
 
-setTaskInProgress = id => {
+  setTaskInProgress = id => {
     return this.updateTask(id, {finishedDate: null})
   }
 
@@ -47,13 +47,13 @@ setTaskInProgress = id => {
     return this.api.put(`/api/tasks/${id}`, requestBody);
   };
 
-  // DELETE /api/SOMETHING/:id
-  deleteSOMETHING = id => {
-    return this.api.delete(`/api/SOMETHING/${id}`);
+  // DELETE /api/tasks/:id
+  deleteTask = id => {
+    return this.api.delete(`/api/tasks/${id}`);
   };
 }
 
 // Create one instance object
-const businessService = new BusinessService();
+const taskService = new TaskService();
 
-export default businessService;
+export default taskService;

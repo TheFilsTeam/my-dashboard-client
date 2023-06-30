@@ -47,6 +47,29 @@
   text-decoration: line-through;
   color: grey;
 }
+
+#todo-list #add-task {
+ margin-left: 5px;
+}
+
 #todo-list li {
-  margin: 5px 0px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#todo-list .delete {
+  color: grey;
+  visibility: hidden;
+  /* margin-left: 50px; */
+}
+
+#todo-list li:hover {
+  border-radius: 5px;
+  background-color: rgb(166, 203, 245);
+}
+
+#todo-list li:hover .delete {
+  visibility: visible;
 }
