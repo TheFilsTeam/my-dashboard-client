@@ -5,11 +5,11 @@ import Pomodoro from "../components/Pomodoro";
 export default function Home(props) {
   return (
     <Container fluid>
-      <h1>restricted home page 👍</h1>
+      <h1>Your dashboard</h1>
       <Flex
         mih={50}
         gap="md"
-        justify="space-between"
+        justify="space-evenly"
         align="flex-start"
         direction="row"
         wrap="wrap"
