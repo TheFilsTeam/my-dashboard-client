@@ -2,9 +2,11 @@ import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import settingsService from "../services/settings.service";
 import { useEffect, useState } from "react";
+import { IconTrash } from "@tabler/icons-react";
 
 export default function Settings() {
     const [email, setEmail] = useState("");
+    const [timers, setTimers] = useState([]);
 	const form = useForm({
 		initialValues: {
             name: '',
@@ -25,6 +27,7 @@ export default function Settings() {
 				console.log("settings", settings);
                 form.setValues(settings);
                 setEmail(settings.email);
+                setTimers(settings.timers);
 			})
 			.catch((e) => {
 				const errorDescription = e.response.data.message;
@@ -49,6 +52,12 @@ export default function Settings() {
 			});
 	};
 
+    const deleteTimer = (id) => {
+        settingsService.deleteTimer(id).then((response) => {
+            setTimers(timers.filter((t) => t._id !== id));
+          console.log("Changed state value");
+        });
+      };
 
     return (
     
@@ -74,6 +83,21 @@ export default function Settings() {
                     mt="md"
                 /> */}
 
+            </section>
+
+            <section>
+                <h2>Timers</h2>
+
+                {timers.length === 0 && <p> No timers defined ⏲️</p>}
+                {timers.length !== 0 && <ul>
+                    {timers.map((t) => (
+                        <li key={t._id}>
+                            {t.title} / {t.duration}
+                            <IconTrash className="delete" onClick={() => deleteTimer(t._id)} />
+                        </li>
+        ))}
+                    </ul>
+                }
             </section>
 
             <section>
