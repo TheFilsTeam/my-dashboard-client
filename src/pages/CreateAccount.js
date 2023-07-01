@@ -10,9 +10,11 @@ import {
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
 import authService from '../services/auth.service';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/auth.context';
 
 export default function CreateAccount() {
+	const { storeToken, authenticateUser } = useContext(AuthContext);
 	const [errorMessage, setErrorMessage] = useState(null);
 
 	const navigate = useNavigate();
@@ -37,8 +39,9 @@ export default function CreateAccount() {
 		authService
 			.signup({ email, name, password })
 			.then((response) => {
-				console.log(response.data);
-				navigate('/login');
+				storeToken(response.data.authToken);
+				authenticateUser();
+				navigate('/');
 			})
 			.catch((e) => {
 				setErrorMessage(e.response.data.message);
