@@ -41,9 +41,8 @@ export default function SignIn() {
 				navigate('/');
 			})
 			.catch((e) => {
-				setErrorMessage(e.response.data.message);
 				const errorDescription = e.response.data.message;
-				// setErrorMessage(errorDescription);
+				setErrorMessage(errorDescription);
 				console.log(errorDescription);
 			});
 	};

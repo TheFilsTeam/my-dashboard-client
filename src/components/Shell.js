@@ -75,7 +75,7 @@ export default function Shell() {
 							/>
 						</MediaQuery>
 
-						<Text>Application header</Text>
+						<Text>Your beloved dashboard</Text>
 					</div>
 				</Header>
 			}
