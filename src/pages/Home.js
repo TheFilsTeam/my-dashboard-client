@@ -9,6 +9,8 @@ export default function Home(props) {
 
   const [settings, setSettings] = useState({});
   useEffect(() => {
+    Notification.requestPermission();
+    
 		settingsService
 			.getSettings()
 			.then((response) => {

@@ -12,7 +12,15 @@ export default function PomodoroTimer(props) {
 				} else {
 					clearInterval(props.timerRef.current);
 					props.setTimerStatus('stopped');
-					alert('Time is up!');
+					if (Notification.permission === "granted") {
+						var options = {
+							body: 'Please make a break!',
+							icon: './hourglass.png',
+						  };
+						new Notification('Time is up!', options);
+					} else {
+						alert("Please make a break!");
+					}
 				}
 			}, 1000);
 		}
