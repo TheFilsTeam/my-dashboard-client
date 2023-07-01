@@ -9,6 +9,7 @@ export default function Settings() {
 		initialValues: {
             name: '',
 			password: '',
+			spotifyContent: '',
 		},
 
 		// validate: {
@@ -75,6 +76,16 @@ export default function Settings() {
 
             </section>
 
+            <section>
+                <h2>Spotify</h2>
+                <TextInput
+						label="Spotify playlist"
+						name="spotifyContent"
+						placeholder="a spotify playlist or album url"
+						{...form.getInputProps('spotifyContent')}
+						required
+					/>
+            </section>
 
             <Button fullWidth mt="xl" type="submit">
             Save Settings
