@@ -1,9 +1,16 @@
-import { Flex, Button, NumberInput } from '@mantine/core';
-import React from 'react';
+import { Flex, Button, NumberInput, Center, Paper } from '@mantine/core';
+import React, { useState } from 'react';
 
-export default function PomodoroControls(props) {
-	return (
-		<>
+export default function PomodoroControls({timerService}) {
+	// console.log("timerService props in PomodoroControls", timerService);
+	const [minutes, setMinutes] = useState(0);
+	const [seconds, setSeconds] = useState(15);
+	if (!timerService) {
+		return <div></div>;
+	}
+
+	return (<Center>
+	<Paper maw={600} shadow="xs" p="md">
 			<Flex
 				mih={50}
 				gap="md"
@@ -21,13 +28,13 @@ export default function PomodoroControls(props) {
 					direction="row"
 					wrap="wrap"
 				>
-					<Button miw={80} onClick={() => props.addToTimer(5)}>
+					<Button miw={80} onClick={() => setMinutes(minutes + 5)}>
 						+5m
 					</Button>
-					<Button miw={80} onClick={() => props.addToTimer(10)}>
+					<Button miw={80} onClick={() => setMinutes(minutes + 10)}>
 						+10m
 					</Button>
-					<Button miw={80} onClick={() => props.addToTimer(15)}>
+					<Button miw={80} onClick={() => setMinutes(minutes + 15)}>
 						+15m
 					</Button>
 				</Flex>
@@ -44,8 +51,8 @@ export default function PomodoroControls(props) {
 						maw={70}
 						label="Minutes"
 						defaultValue={0}
-						value={props.minutesLeft}
-						onChange={(e) => props.setRemainingSeconds(e * 60)}
+						value={minutes}
+						onChange={(e) => setMinutes(e)}
 						min={0}
 						max={60}
 						parser={(value) => value.replace(/[^\d]/g, '')}
@@ -55,8 +62,8 @@ export default function PomodoroControls(props) {
 						maw={70}
 						label="Seconds"
 						defaultValue={0}
-						value={props.secondsLeft}
-						onChange={(e) => props.setRemainingSeconds(e)}
+						value={seconds}
+						onChange={(e) => setSeconds(e)}
 						min={0}
 						max={60}
 						parser={(value) => value.replace(/[^\d]/g, '')}
@@ -72,21 +79,23 @@ export default function PomodoroControls(props) {
 					wrap="wrap"
 					gap="md"
 				>
-					<Button variant="filled" onClick={props.handleStartTimer}>
-						Start timer
+					<Button variant="filled" onClick={() => timerService.startTimer(minutes * 60 + seconds)}>
+						Start
 					</Button>
-					<Button color="red" variant="filled" onClick={props.handleStopTimer}>
-						Stop timer
-					</Button>
+					{/* <Button color="red" variant="outline" onClick={timerService.pause}>
+						Pause
+					</Button> */}
 					<Button
 						color="red"
-						variant="outline"
-						onClick={props.handleResetTimer}
+						 variant="filled"
+						onClick={timerService.stopTimer}
 					>
-						Reset timer
+						Stop
 					</Button>
 				</Flex>
 			</Flex>
-		</>
+		</Paper>
+	</Center>
+
 	);
 }

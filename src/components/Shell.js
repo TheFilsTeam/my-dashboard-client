@@ -15,7 +15,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
 
 import { NavbarContent } from './NavbarContent';
-import PomodoroTimer from './Pomodoro/PomodoroTimer';
+import PomodoroSummary from './Pomodoro/PomodoroSummary';
 
 export default function Shell(props) {
 	const theme = useMantineTheme();
@@ -26,13 +26,6 @@ export default function Shell(props) {
 		onOpen: () => console.log('Opened'),
 		onClose: () => console.log('Closed'),
 	}); //manages open/close state
-
-	const timeFormat = (s) => {
-		let minutes = Math.floor(s / 60);
-		let seconds = (s % 60).toString().padStart(2, '0');
-
-		return `${minutes}:${seconds}`;
-	};
 
 	return (
 		<AppShell
@@ -80,9 +73,7 @@ export default function Shell(props) {
 						</MediaQuery>
 
 						<Text>Your beloved dashboard</Text>
-						<PomodoroTimer
-							timeFormat={timeFormat}
-							remainingSeconds={props.remainingSeconds} />
+						<PomodoroSummary timerService={props.timerService} />
 					</div>
 				</Header>
 			}

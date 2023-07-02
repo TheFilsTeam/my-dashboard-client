@@ -11,47 +11,14 @@ import IsPrivate from './components/IsPrivate';
 import IsAnon from './components/IsAnon';
 import Settings from './pages/Settings';
 import Home from './pages/Home';
+import { TimerService, TimerStatus } from './services/timer.service';
 
 function App() {
-	const [timerStatus, setTimerStatus] = useState('stopped');
-	const [timer, setTimer] = useState(null);
+	const [timerStatus, setTimerStatus] = useState(TimerStatus.Stopped);
 	const [remainingSeconds, setRemainingSeconds] = useState(0);
+	const [timerService, setTimerService] = useState(new TimerService(setTimerStatus, setRemainingSeconds));
 
-	const stopTimer = () => {
-		clearInterval(timer);
-		setTimer(null);
-	}
-
-	console.log(remainingSeconds);
-	//Timer function
-	useEffect(() => {
-		console.log('in use effect');
-		if (timerStatus === 'launching') {
-			console.log('Launching...', remainingSeconds);
-			setTimerStatus('running');
-			setTimer(setInterval(() => {
-				console.log('Ticking....Updating value....');
-				setRemainingSeconds((prevRemainingSeconds) => {
-					const newValue = prevRemainingSeconds - 1;
-					console.log('newValue', newValue);
-					return newValue;
-				});
-			}, 1000));
-		}
-		return () => {
-			/* clearInterval(timerRef.current); */
-		};
-	}, [timerStatus]);
-
-	if (timerStatus === 'running' && remainingSeconds <= 0) {
-		setTimerStatus('stopped');
-		alert('Time is up!');
-		stopTimer();
-	}
-
-	if (timerStatus === 'stopped' && timer !== null) {
-		stopTimer();
-	}
+	console.log("timerService", timerService);
 
 	return (
 		<div className="App">
@@ -77,19 +44,14 @@ function App() {
 						path="/"
 						element={
 							<IsPrivate>
-								<Shell remainingSeconds={remainingSeconds} />
+								<Shell timerService={timerService} />
 							</IsPrivate>
 						}
 					>
 						<Route
 							path="/"
 							element={
-								<Home
-									remainingSeconds={remainingSeconds}
-									setRemainingSeconds={setRemainingSeconds}
-									timerStatus={timerStatus}
-									setTimerStatus={setTimerStatus}
-								/>
+								<Home timerService={timerService} />
 							}
 						/>
 						<Route path="/settings" element={<Settings />} />
