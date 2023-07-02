@@ -2,7 +2,7 @@ import { Flex, Button, NumberInput, Center, Paper } from '@mantine/core';
 import React, { useState } from 'react';
 import { TimerStatus } from '../../services/timer.service';
 
-export default function PomodoroControls({timerService}) {
+export default function PomodoroControls({timerService, timers}) {
 	// console.log("timerService props in PomodoroControls", timerService);
 	const [minutes, setMinutes] = useState(0);
 	const [seconds, setSeconds] = useState(15);
@@ -30,6 +30,11 @@ export default function PomodoroControls({timerService}) {
 					wrap="wrap"
 				>
 { timerService.getStatus() === TimerStatus.InProgress && <p>{timerService.getTime()}</p>}
+{ timerService.getStatus() !== TimerStatus.InProgress && timers && (
+	<>
+		{timers.map(t => <Button miw={80} onClick={() => setSeconds(+t.duration)}>{t.title} - {t.duration}</Button>) }
+	</>)
+	}
 { timerService.getStatus() !== TimerStatus.InProgress && (
 	<>
 				<Button miw={80} onClick={() => setMinutes(minutes + 5)}>
@@ -42,8 +47,7 @@ export default function PomodoroControls({timerService}) {
 						+15m
 					</Button>
 	</>)
-	}
-				</Flex>
+	}				</Flex>
 				{ timerService.getStatus() !== TimerStatus.InProgress && <Flex
 					mih={50}
 					gap="md"

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import settingsService from "../services/settings.service";
 import PomodoroControls from '../components/Pomodoro/PomodoroControls';
 
-export default function Home(props) {
+export default function Home({timerService}) {
 	// console.log("timerService props in Home", props.timerService);
 
   const [settings, setSettings] = useState({});
@@ -38,8 +38,8 @@ export default function Home(props) {
 				wrap="wrap"
 			>
 				<ToDoList />
-				<PomodoroControls timerService={props.timerService}	/>
-	        <Spotify contentUrl={settings.spotifyContent}/>
+				<PomodoroControls timerService={timerService} timers={settings?.timers} />
+	      <Spotify contentUrl={settings?.spotifyContent} />
 			</Flex>
 		</Container>
 	);
