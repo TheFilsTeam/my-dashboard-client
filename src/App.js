@@ -14,8 +14,13 @@ import Home from './pages/Home';
 
 function App() {
 	const [timerStatus, setTimerStatus] = useState('stopped');
-	const timerRef = useRef(null);
+	const [timer, setTimer] = useState(null);
 	const [remainingSeconds, setRemainingSeconds] = useState(0);
+
+	const stopTimer = () => {
+		clearInterval(timer);
+		setTimer(null);
+	}
 
 	console.log(remainingSeconds);
 	//Timer function
@@ -24,14 +29,14 @@ function App() {
 		if (timerStatus === 'launching') {
 			console.log('Launching...', remainingSeconds);
 			setTimerStatus('running');
-			timerRef.current = setInterval(() => {
+			setTimer(setInterval(() => {
 				console.log('Ticking....Updating value....');
 				setRemainingSeconds((prevRemainingSeconds) => {
 					const newValue = prevRemainingSeconds - 1;
 					console.log('newValue', newValue);
 					return newValue;
 				});
-			}, 1000);
+			}, 1000));
 		}
 		return () => {
 			/* clearInterval(timerRef.current); */
@@ -41,7 +46,11 @@ function App() {
 	if (timerStatus === 'running' && remainingSeconds <= 0) {
 		setTimerStatus('stopped');
 		alert('Time is up!');
-		clearInterval(timerRef.current);
+		stopTimer();
+	}
+
+	if (timerStatus === 'stopped' && timer !== null) {
+		stopTimer();
 	}
 
 	return (
@@ -80,7 +89,6 @@ function App() {
 									setRemainingSeconds={setRemainingSeconds}
 									timerStatus={timerStatus}
 									setTimerStatus={setTimerStatus}
-									timerRef={timerRef}
 								/>
 							}
 						/>

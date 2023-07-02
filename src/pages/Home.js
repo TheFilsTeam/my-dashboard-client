@@ -10,7 +10,7 @@ export default function Home(props) {
   const [settings, setSettings] = useState({});
   useEffect(() => {
     Notification.requestPermission();
-    
+
 		settingsService
 			.getSettings()
 			.then((response) => {
@@ -42,7 +42,6 @@ export default function Home(props) {
 					setRemainingSeconds={props.setRemainingSeconds}
 					timerStatus={props.timerStatus}
 					setTimerStatus={props.setTimerStatus}
-					timerRef={props.timerRef}
 				/>
 	        <Spotify contentUrl={settings.spotifyContent}/>
 			</Flex>
