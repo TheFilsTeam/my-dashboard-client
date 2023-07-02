@@ -80,6 +80,9 @@ export default function Shell(props) {
 						</MediaQuery>
 
 						<Text>Your beloved dashboard</Text>
+						<PomodoroTimer
+							timeFormat={timeFormat}
+							remainingSeconds={props.remainingSeconds} />
 					</div>
 				</Header>
 			}
