@@ -32,9 +32,11 @@ class TimerService {
 
     stopTimer = () => {
 		clearInterval(this.timer);
+        this.timerStatus = TimerStatus.Stopped;
         this.timer = null;
         console.log("reset to initial", this.initialTime)
         this.setRemainingSeconds(this.initialTime);
+        this.setTimerStatus(this.timerStatus);
 	}
 
     finishedTimer = () => {
@@ -64,6 +66,8 @@ class TimerService {
 
 		return `${minutes}:${seconds}`;
 	};
+
+    getStatus = () => this.timerStatus;
 }
 
 const TimerStatus = {
