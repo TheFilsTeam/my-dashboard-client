@@ -36,8 +36,12 @@ export default function PomodoroControls({ timerService, timers }) {
 						{timerService.getStatus() !== TimerStatus.InProgress && timers && (
 							<>
 								{timers.map((t) => (
-									<Button miw={80} onClick={() => setSeconds(+t.duration)}>
-										{t.title} - {t.duration}
+									<Button
+										color={t.type === 'Work' ? 'red' : 'green'}
+										miw={80}
+										onClick={() => setSeconds(+t.duration)}
+									>
+										{t.type} - {t.duration / 60 + ':' + (t.duration % 60)}
 									</Button>
 								))}
 							</>
