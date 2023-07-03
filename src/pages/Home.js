@@ -1,34 +1,37 @@
 import { Container, Flex } from '@mantine/core';
 import ToDoList from '../components/ToDoList';
-import Spotify from "../components/Spotify";
-import { useEffect, useState } from "react";
-import settingsService from "../services/settings.service";
+import Spotify from '../components/Spotify';
+import { useEffect, useState } from 'react';
+import settingsService from '../services/settings.service';
 import PomodoroControls from '../components/Pomodoro/PomodoroControls';
+import TimerDisplay from '../components/Pomodoro/TimerDisplay';
 
-export default function Home({timerService}) {
+export default function Home({ timerService }) {
 	// console.log("timerService props in Home", props.timerService);
 
-  const [settings, setSettings] = useState({});
-  useEffect(() => {
-    Notification.requestPermission();
+	const [timerTotal, setTimerTotal] = useState(0);
+	const [settings, setSettings] = useState({});
+
+	useEffect(() => {
+		Notification.requestPermission();
 
 		settingsService
 			.getSettings()
 			.then((response) => {
-        const settings = response.data;
+				const settings = response.data;
 				// console.log("settings", settings);
-        setSettings(settings);
+				setSettings(settings);
 			})
 			.catch((e) => {
 				const errorDescription = e.response.data.message;
 				// setErrorMessage(errorDescription);
 				console.error(errorDescription);
 			});
-    }, [])
+	}, []);
 
 	return (
 		<Container fluid>
-			<h1>restricted home page 👍</h1>
+			<TimerDisplay timerService={timerService} timerTotal={timerTotal} />
 			<Flex
 				mih={50}
 				gap="md"
@@ -38,8 +41,12 @@ export default function Home({timerService}) {
 				wrap="wrap"
 			>
 				<ToDoList />
-				<PomodoroControls timerService={timerService} timers={settings?.timers} />
-	      <Spotify contentUrl={settings?.spotifyContent} />
+				<PomodoroControls
+					timerService={timerService}
+					timers={settings?.timers}
+					setTimerTotal={setTimerTotal}
+				/>
+				<Spotify contentUrl={settings?.spotifyContent} />
 			</Flex>
 		</Container>
 	);
