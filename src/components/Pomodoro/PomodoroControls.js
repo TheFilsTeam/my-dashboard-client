@@ -47,7 +47,7 @@ export default function PomodoroControls({
 										onClick={() => setSeconds(+t.duration)}
 									>
 									<center>
-										{t.type} <br /> {t.duration / 60 + ':' + `${t.duration % 60}`.padStart(2, "0")}
+										{t.type} <br /> {Math.floor(t.duration / 60) + ':' + `${t.duration % 60}`.padStart(2, "0")}
 									</center>
 									</Button>
 								))}
@@ -77,7 +77,7 @@ export default function PomodoroControls({
 							direction="row"
 							wrap="wrap"
 						>
-							{seconds / 60 + ':' + `${seconds % 60}`.padStart(2, "0")}
+							{Math.floor(seconds / 60) + ':' + `${seconds % 60}`.padStart(2, "0")}
 							{/* <NumberInput
 								maw={70}
 								label="Minutes"
