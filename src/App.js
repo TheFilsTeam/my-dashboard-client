@@ -12,13 +12,14 @@ import IsAnon from './components/IsAnon';
 import Settings from './pages/Settings';
 import Home from './pages/Home';
 import { TimerService, TimerStatus } from './services/timer.service';
+import { HeaderResponsive } from './components/Header';
 
 function App() {
 	const [timerStatus, setTimerStatus] = useState(TimerStatus.Stopped);
 	const [remainingSeconds, setRemainingSeconds] = useState(0);
-	const [timerService, setTimerService] = useState(new TimerService(setTimerStatus, setRemainingSeconds));
-
-	console.log("timerService", timerService);
+	const [timerService, setTimerService] = useState(
+		new TimerService(setTimerStatus, setRemainingSeconds)
+	);
 
 	return (
 		<div className="App">
@@ -44,16 +45,12 @@ function App() {
 						path="/"
 						element={
 							<IsPrivate>
-								<Shell timerService={timerService} />
+								{/* <Shell timerService={timerService} /> */}
+								<HeaderResponsive timerService={timerService} />
 							</IsPrivate>
 						}
 					>
-						<Route
-							path="/"
-							element={
-								<Home timerService={timerService} />
-							}
-						/>
+						<Route path="/" element={<Home timerService={timerService} />} />
 						<Route path="/settings" element={<Settings />} />
 					</Route>
 				</Routes>

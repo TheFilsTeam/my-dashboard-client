@@ -62,15 +62,13 @@ export default function Shell(props) {
 					<div
 						style={{ display: 'flex', alignItems: 'center', height: '100%' }}
 					>
-						<MediaQuery /* largerThan="sm" styles={{ display: 'none' }} */>
-							<Burger
-								opened={openedNav}
-								onClick={toggle}
-								size="sm"
-								color={theme.colors.gray[6]}
-								mr="xl"
-							/>
-						</MediaQuery>
+						<Burger
+							opened={openedNav}
+							onClick={toggle}
+							size="sm"
+							color={theme.colors.gray[6]}
+							mr="xl"
+						/>
 
 						<Text>Your beloved dashboard</Text>
 						<PomodoroSummary timerService={props.timerService} />
