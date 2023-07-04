@@ -10,7 +10,7 @@ export default function PomodoroControls({
 }) {
 	// console.log("timerService props in PomodoroControls", timerService);
 	const [minutes, setMinutes] = useState(0);
-	const [seconds, setSeconds] = useState(15);
+	const [seconds, setSeconds] = useState(0);
 
 	if (!timerService) {
 		return <div></div>;
