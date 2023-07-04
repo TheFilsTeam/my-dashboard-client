@@ -46,12 +46,14 @@ export default function PomodoroControls({
 										miw={80}
 										onClick={() => setSeconds(+t.duration)}
 									>
-										{t.type} - {t.duration / 60 + ':' + (t.duration % 60)}
+									<center>
+										{t.type} <br /> {t.duration / 60 + ':' + `${t.duration % 60}`.padStart(2, "0")}
+									</center>
 									</Button>
 								))}
 							</>
 						)}
-						{timerService.getStatus() !== TimerStatus.InProgress && (
+						{/* {timerService.getStatus() !== TimerStatus.InProgress && (
 							<>
 								<Button miw={80} onClick={() => setMinutes(minutes + 5)}>
 									+30s
@@ -63,7 +65,7 @@ export default function PomodoroControls({
 									+2m
 								</Button>
 							</>
-						)}{' '}
+						)} */}
 					</Flex>
 					{timerService.getStatus() !== TimerStatus.InProgress && (
 						<Flex
@@ -75,7 +77,8 @@ export default function PomodoroControls({
 							direction="row"
 							wrap="wrap"
 						>
-							<NumberInput
+							{seconds / 60 + ':' + `${seconds % 60}`.padStart(2, "0")}
+							{/* <NumberInput
 								maw={70}
 								label="Minutes"
 								defaultValue={0}
@@ -96,7 +99,7 @@ export default function PomodoroControls({
 								max={60}
 								parser={(value) => value.replace(/[^\d]/g, '')}
 								formatter={(value) => value}
-							/>
+							/> */}
 						</Flex>
 					)}
 
