@@ -69,7 +69,7 @@ class TimerService {
 	finishedTimer = () => {
 		if (Notification.permission === 'granted') {
 			var options = {
-				body: 'Please make a break!',
+				body: 'Please take a break!',
 				icon: './hourglass.png',
 			};
 			new Notification('Time is up!', options);
