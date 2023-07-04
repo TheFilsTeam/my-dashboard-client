@@ -6,6 +6,7 @@ import settingsService from '../services/settings.service';
 import PomodoroControls from '../components/Pomodoro/PomodoroControls';
 import TimerBar from '../components/Pomodoro/TimerBar';
 import CowSay from '../components/CowSay';
+import Meme from '../components/Meme';
 
 export default function Home({ timerService }) {
 	// console.log("timerService props in Home", props.timerService);
@@ -46,6 +47,7 @@ export default function Home({ timerService }) {
 			<ToDoList />
 			<Spotify contentUrl={settings?.spotifyContent} />
 			<CowSay />
+			<Meme />
 		</Flex>
 	);
 }
