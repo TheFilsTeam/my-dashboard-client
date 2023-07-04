@@ -41,7 +41,6 @@ export default function Home({ timerService }) {
 			<PomodoroControls
 				timerService={timerService}
 				timers={settings?.timers}
-				setTimerTotal={setTimerTotal}
 			/>
 			<ToDoList />
 			<Spotify contentUrl={settings?.spotifyContent} />

@@ -6,7 +6,6 @@ import CircleTimerProgress from './CircleTimerProgress';
 export default function PomodoroControls({
 	timerService,
 	timers,
-	setTimerTotal,
 }) {
 	// console.log("timerService props in PomodoroControls", timerService);
 	const [minutes, setMinutes] = useState(0);
@@ -41,6 +40,7 @@ export default function PomodoroControls({
 							<>
 								{timers.map((t) => (
 									<Button
+										key={`${t.type}-${t.duration}`}
 										color={t.type === 'Work' ? 'red' : 'green'}
 										miw={80}
 										onClick={() => {
@@ -129,10 +129,7 @@ export default function PomodoroControls({
 						{timerService.getStatus() === TimerStatus.Stopped && (
 							<Button
 								variant="filled"
-								onClick={() => {
-									timerService.startTimer(minutes * 60 + seconds);
-									setTimerTotal(timerService.remainingSeconds);
-								}}
+								onClick={() => timerService.startTimer(minutes * 60 + seconds)}
 							>
 								Start
 							</Button>
