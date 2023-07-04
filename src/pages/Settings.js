@@ -96,19 +96,16 @@ export default function Settings() {
 	};
 
 	const updateTimer = (timer) => {
-		console.log('updateTimer', timer, currentTimer._id);
-		//TODO Call to api : settingsService.updateTimer()
+        const updatedTimer = {...timer, _id: currentTimer._id}
 		settingsService
 			.updateTimer(currentTimer._id, timer)
 			.then((response) => {
 				const newTimers = timers.map((element) =>
-					element.id === currentTimer._id
-						? { _id: currentTimer._id, ...timer }
+					element._id === currentTimer._id
+						? updatedTimer
 						: element
 				);
-				console.log('saved', timer, currentTimer._id, newTimers);
 				setTimers(newTimers);
-				console.log('saved2', newTimers);
 				close();
 			})
 			.catch((e) => {
