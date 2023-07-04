@@ -4,7 +4,7 @@ import Spotify from '../components/Spotify';
 import { useEffect, useState } from 'react';
 import settingsService from '../services/settings.service';
 import PomodoroControls from '../components/Pomodoro/PomodoroControls';
-import TimerDisplay from '../components/Pomodoro/TimerDisplay';
+import TimerBar from '../components/Pomodoro/TimerBar';
 
 export default function Home({ timerService }) {
 	// console.log("timerService props in Home", props.timerService);
@@ -31,7 +31,7 @@ export default function Home({ timerService }) {
 
 	return (
 		<Container fluid>
-			<TimerDisplay timerService={timerService} timerTotal={timerTotal} />
+			<TimerBar timerService={timerService} timerTotal={timerTotal} />
 			<Flex
 				mih={50}
 				gap="md"
