@@ -107,6 +107,10 @@ const links = [
 		label: 'Settings',
 		link: '/settings',
 	},
+	{
+		label: 'Fun for breaks',
+		link: '/fun',
+	},
 	{ label: 'Logout', link: '/logout' },
 ];
 

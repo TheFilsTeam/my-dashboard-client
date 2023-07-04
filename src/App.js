@@ -13,6 +13,7 @@ import Settings from './pages/Settings';
 import Home from './pages/Home';
 import { TimerService, TimerStatus } from './services/timer.service';
 import { HeaderResponsive } from './components/Header';
+import FunForBreaks from './pages/FunForBreaks';
 
 function App() {
 	const [timerStatus, setTimerStatus] = useState(TimerStatus.Stopped);
@@ -52,6 +53,7 @@ function App() {
 					>
 						<Route path="/" element={<Home timerService={timerService} />} />
 						<Route path="/settings" element={<Settings />} />
+						<Route path="/fun" element={<FunForBreaks />} />
 					</Route>
 				</Routes>
 			</MantineProvider>
