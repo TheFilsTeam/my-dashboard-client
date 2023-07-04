@@ -43,7 +43,7 @@ const useStyles = createStyles((theme) => ({
 
 	header: {
 		display: 'flex',
-		justifyContent: 'space-between',
+		justifyContent: 'flexStart',
 		alignItems: 'center',
 		height: '100%',
 	},
@@ -147,8 +147,37 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 
 	return (
 		<>
-			<Header height={HEADER_HEIGHT} mb={120} className={classes.root}>
-				<Container className={classes.header}>
+			<Header height={HEADER_HEIGHT} mb={20} className={classes.root}>
+				<Flex
+					ml={15}
+					className={classes.header}
+					align="center"
+					justify="space-between"
+				>
+					<Group spacing={5} className={classes.links}>
+						{items}
+					</Group>
+					<Burger
+						opened={opened}
+						onClick={toggle}
+						className={classes.burger}
+						size="sm"
+					/>
+
+					<Transition
+						transition="pop-top-right"
+						duration={200}
+						mounted={opened}
+					>
+						{(styles) => (
+							<Paper className={classes.dropdown} withBorder style={styles}>
+								{items}
+							</Paper>
+						)}
+					</Transition>
+					<Flex mr={20}>{timerService.getTime()}</Flex>
+				</Flex>
+				{/* <Container className={classes.header}>
 					<Group spacing={5} className={classes.links}>
 						{items}
 					</Group>
@@ -171,7 +200,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 							</Paper>
 						)}
 					</Transition>
-				</Container>
+				</Container> */}
 				<TimerBar timerService={timerService} TimerStatus={TimerStatus} />
 			</Header>
 
