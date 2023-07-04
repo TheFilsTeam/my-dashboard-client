@@ -111,6 +111,10 @@ const links = [
 		label: 'Fun for breaks',
 		link: '/fun',
 	},
+	{
+		label: 'Whiteboard',
+		link: '/whiteboard',
+	},
 	{ label: 'Logout', link: '/logout' },
 ];
 
