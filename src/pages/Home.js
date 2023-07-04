@@ -30,24 +30,21 @@ export default function Home({ timerService }) {
 	}, []);
 
 	return (
-		<Container fluid>
-			<TimerBar timerService={timerService} timerTotal={timerTotal} />
-			<Flex
-				mih={50}
-				gap="md"
-				justify="space-between"
-				align="flex-start"
-				direction="row"
-				wrap="wrap"
-			>
-				<ToDoList />
-				<PomodoroControls
-					timerService={timerService}
-					timers={settings?.timers}
-					setTimerTotal={setTimerTotal}
-				/>
-				<Spotify contentUrl={settings?.spotifyContent} />
-			</Flex>
-		</Container>
+		<Flex
+			mih={50}
+			gap="md"
+			justify="space-around"
+			align="flex-start"
+			direction="row"
+			wrap="wrap"
+		>
+			<PomodoroControls
+				timerService={timerService}
+				timers={settings?.timers}
+				setTimerTotal={setTimerTotal}
+			/>
+			<ToDoList />
+			<Spotify contentUrl={settings?.spotifyContent} />
+		</Flex>
 	);
 }

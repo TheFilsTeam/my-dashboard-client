@@ -9,10 +9,13 @@ import {
 	Transition,
 	rem,
 	Flex,
+	Grid,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
+import TimerBar from './Pomodoro/TimerBar';
+import { TimerStatus } from '../services/timer.service';
 
 const HEADER_HEIGHT = rem(60);
 
@@ -107,7 +110,7 @@ const links = [
 	{ label: 'Logout', link: '/logout' },
 ];
 
-export function HeaderResponsive() {
+export function HeaderResponsive({ timerService, timerTotal }) {
 	const [opened, { toggle, close }] = useDisclosure(false);
 
 	const [active, setActive] = useState(window.location.pathname);
@@ -169,6 +172,7 @@ export function HeaderResponsive() {
 						)}
 					</Transition>
 				</Container>
+				<TimerBar timerService={timerService} TimerStatus={TimerStatus} />
 			</Header>
 
 			<Container fluid>
