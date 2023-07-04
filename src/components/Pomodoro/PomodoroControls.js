@@ -1,6 +1,7 @@
 import { Flex, Button, NumberInput, Center, Paper } from '@mantine/core';
 import React, { useState } from 'react';
 import { TimerStatus } from '../../services/timer.service';
+import CircleTimerProgress from './CircleTimerProgress';
 
 export default function PomodoroControls({
 	timerService,
@@ -26,6 +27,7 @@ export default function PomodoroControls({
 					direction="column"
 					wrap="wrap"
 				>
+					{/* Timer buttons from settings */}
 					<Flex
 						mih={50}
 						gap="md"
@@ -35,20 +37,23 @@ export default function PomodoroControls({
 						direction="row"
 						wrap="wrap"
 					>
-						{timerService.getStatus() === TimerStatus.InProgress && (
-							<p>{timerService.getTime()}</p>
-						)}
 						{timerService.getStatus() !== TimerStatus.InProgress && timers && (
 							<>
 								{timers.map((t) => (
 									<Button
 										color={t.type === 'Work' ? 'red' : 'green'}
 										miw={80}
-										onClick={() => setSeconds(+t.duration)}
+										onClick={() => {
+											setSeconds(+t.duration);
+											timerService.setInitialTime(+t.duration);
+										}}
 									>
-									<center>
-										{t.type} <br /> {Math.floor(t.duration / 60) + ':' + `${t.duration % 60}`.padStart(2, "0")}
-									</center>
+										<center>
+											{t.type} <br />{' '}
+											{Math.floor(t.duration / 60) +
+												':' +
+												`${t.duration % 60}`.padStart(2, '0')}
+										</center>
 									</Button>
 								))}
 							</>
@@ -67,18 +72,22 @@ export default function PomodoroControls({
 							</>
 						)} */}
 					</Flex>
-					{timerService.getStatus() !== TimerStatus.InProgress && (
-						<Flex
-							mih={50}
-							gap="md"
-							m="sm"
-							justify="center"
-							align="center"
-							direction="row"
-							wrap="wrap"
-						>
-							{Math.floor(seconds / 60) + ':' + `${seconds % 60}`.padStart(2, "0")}
-							{/* <NumberInput
+
+					{/* Timer display */}
+					{/* {timerService.getStatus() === TimerStatus.InProgress && ( */}
+					<Flex
+						mih={50}
+						gap="md"
+						m="sm"
+						justify="center"
+						align="center"
+						direction="row"
+						wrap="wrap"
+					>
+						{/* {Math.floor(seconds / 60) +
+								':' +
+								`${seconds % 60}`.padStart(2, '0')} */}
+						{/* <NumberInput
 								maw={70}
 								label="Minutes"
 								defaultValue={0}
@@ -100,9 +109,15 @@ export default function PomodoroControls({
 								parser={(value) => value.replace(/[^\d]/g, '')}
 								formatter={(value) => value}
 							/> */}
-						</Flex>
-					)}
+						<CircleTimerProgress
+							timerService={timerService}
+							minutes={minutes}
+							seconds={seconds}
+						/>
+					</Flex>
+					{/* )} */}
 
+					{/* Start-Pause Buttons */}
 					<Flex
 						mih={50}
 						justify="center"
@@ -111,25 +126,37 @@ export default function PomodoroControls({
 						wrap="wrap"
 						gap="md"
 					>
-						<Button
-							variant="filled"
-							onClick={() => {
-								timerService.startTimer(minutes * 60 + seconds);
-								setTimerTotal(timerService.remainingSeconds);
-							}}
-						>
-							Start
-						</Button>
-						{/* <Button color="red" variant="outline" onClick={timerService.pause}>
-						Pause
-					</Button> */}
-						<Button
-							color="red"
-							variant="filled"
-							onClick={timerService.stopTimer}
-						>
-							Pause
-						</Button>
+						{timerService.getStatus() === TimerStatus.Stopped && (
+							<Button
+								variant="filled"
+								onClick={() => {
+									timerService.startTimer(minutes * 60 + seconds);
+									setTimerTotal(timerService.remainingSeconds);
+								}}
+							>
+								Start
+							</Button>
+						)}
+
+						{timerService.getStatus() === TimerStatus.InProgress && (
+							<Button
+								color="green"
+								variant="outline"
+								onClick={timerService.toggleTimer}
+							>
+								Pause
+							</Button>
+						)}
+
+						{timerService.getStatus() === TimerStatus.Paused && (
+							<Button
+								color="green"
+								variant="filled"
+								onClick={timerService.toggleTimer}
+							>
+								Start
+							</Button>
+						)}
 					</Flex>
 				</Flex>
 			</Paper>
