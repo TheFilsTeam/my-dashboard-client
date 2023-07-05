@@ -1,4 +1,4 @@
-import { Button, Group, Modal, Paper, TextInput } from '@mantine/core';
+import { Button, Modal, Paper, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import settingsService from '../services/settings.service';
 import { useEffect, useState } from 'react';
@@ -18,13 +18,13 @@ export default function Settings() {
 	const form = useForm({
 		initialValues: {
 			name: '',
-			password: '',
+			/* password: '', */
 			spotifyContent: '',
 		},
 
-		// validate: {
-		// 	email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-		// },
+		/* validate: {
+			email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+		}, */
 	});
 
 	useEffect(() => {
@@ -96,14 +96,12 @@ export default function Settings() {
 	};
 
 	const updateTimer = (timer) => {
-        const updatedTimer = {...timer, _id: currentTimer._id}
+		const updatedTimer = { ...timer, _id: currentTimer._id };
 		settingsService
 			.updateTimer(currentTimer._id, timer)
 			.then((response) => {
 				const newTimers = timers.map((element) =>
-					element._id === currentTimer._id
-						? updatedTimer
-						: element
+					element._id === currentTimer._id ? updatedTimer : element
 				);
 				setTimers(newTimers);
 				close();
@@ -132,12 +130,12 @@ export default function Settings() {
 						required
 					/>
 					{/* <PasswordInput
-                    label="Password"
-                    placeholder="Your password"
-                    {...form.getInputProps('password')}
-                    required
-                    mt="md"
-                /> */}
+						label="Password"
+						placeholder="Your password"
+						{...form.getInputProps('password')}
+						required
+						mt="md"
+					/> */}
 				</section>
 
 				<section>
@@ -197,9 +195,9 @@ export default function Settings() {
 				{/* Button OnSubmit={validate} */}
 			</Modal>
 
-			<Group position="center">
+			{/* <Group position="center">
 				<Button onClick={open}>Open centered Modal</Button>
-			</Group>
+			</Group> */}
 		</div>
 	);
 }
