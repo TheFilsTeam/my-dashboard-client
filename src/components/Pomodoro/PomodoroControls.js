@@ -3,13 +3,10 @@ import React, { useState } from 'react';
 import { TimerStatus } from '../../services/timer.service';
 import CircleTimerProgress from './CircleTimerProgress';
 
-export default function PomodoroControls({
-	timerService,
-	timers,
-}) {
+export default function PomodoroControls({ timerService, timers }) {
 	// console.log("timerService props in PomodoroControls", timerService);
-	const [minutes, setMinutes] = useState(0);
-	const [seconds, setSeconds] = useState(0);
+	/* const [minutes, setMinutes] = useState(0);
+	const [seconds, setSeconds] = useState(0); */
 
 	if (!timerService) {
 		return <div></div>;
@@ -44,7 +41,7 @@ export default function PomodoroControls({
 										color={t.type === 'Work' ? 'red' : 'green'}
 										miw={80}
 										onClick={() => {
-											setSeconds(+t.duration);
+											/* setSeconds(+t.duration); */
 											timerService.setInitialTime(+t.duration);
 										}}
 									>
@@ -58,23 +55,9 @@ export default function PomodoroControls({
 								))}
 							</>
 						)}
-						{/* {timerService.getStatus() !== TimerStatus.InProgress && (
-							<>
-								<Button miw={80} onClick={() => setMinutes(minutes + 5)}>
-									+30s
-								</Button>
-								<Button miw={80} onClick={() => setMinutes(minutes + 10)}>
-									+1m
-								</Button>
-								<Button miw={80} onClick={() => setMinutes(minutes + 15)}>
-									+2m
-								</Button>
-							</>
-						)} */}
 					</Flex>
 
 					{/* Timer display */}
-					{/* {timerService.getStatus() === TimerStatus.InProgress && ( */}
 					<Flex
 						mih={50}
 						gap="md"
@@ -84,38 +67,8 @@ export default function PomodoroControls({
 						direction="row"
 						wrap="wrap"
 					>
-						{/* {Math.floor(seconds / 60) +
-								':' +
-								`${seconds % 60}`.padStart(2, '0')} */}
-						{/* <NumberInput
-								maw={70}
-								label="Minutes"
-								defaultValue={0}
-								value={minutes}
-								onChange={(e) => setMinutes(e)}
-								min={0}
-								max={60}
-								parser={(value) => value.replace(/[^\d]/g, '')}
-								formatter={(value) => value}
-							/>
-							<NumberInput
-								maw={70}
-								label="Seconds"
-								defaultValue={0}
-								value={seconds}
-								onChange={(e) => setSeconds(e)}
-								min={0}
-								max={60}
-								parser={(value) => value.replace(/[^\d]/g, '')}
-								formatter={(value) => value}
-							/> */}
-						<CircleTimerProgress
-							timerService={timerService}
-							minutes={minutes}
-							seconds={seconds}
-						/>
+						<CircleTimerProgress timerService={timerService} />
 					</Flex>
-					{/* )} */}
 
 					{/* Start-Pause Buttons */}
 					<Flex
@@ -129,7 +82,13 @@ export default function PomodoroControls({
 						{timerService.getStatus() === TimerStatus.Stopped && (
 							<Button
 								variant="filled"
-								onClick={() => timerService.startTimer(minutes * 60 + seconds)}
+								onClick={() =>
+									timerService.startTimer(
+										timerService.remainingSeconds
+
+										/* minutes * 60 + seconds */
+									)
+								}
 							>
 								Start
 							</Button>
@@ -154,6 +113,17 @@ export default function PomodoroControls({
 								Start
 							</Button>
 						)}
+
+						{timerService.getStatus() === TimerStatus.Paused ||
+							(timerService.getStatus() === TimerStatus.InProgress && (
+								<Button
+									color="red"
+									variant="filled"
+									onClick={timerService.stopTimer}
+								>
+									Stop
+								</Button>
+							))}
 					</Flex>
 				</Flex>
 			</Paper>
