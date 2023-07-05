@@ -53,7 +53,8 @@ class TimerService {
 		this.timerStatus = TimerStatus.Stopped;
 		this.timer = null;
 		console.log('reset to initial', this.initialTime);
-		this.setRemainingSeconds(this.initialTime);
+		this.remainingSeconds = this.initialTime;
+		this.setRemainingSeconds(this.remainingSeconds);
 		this.setTimerStatus(this.timerStatus);
 	};
 
