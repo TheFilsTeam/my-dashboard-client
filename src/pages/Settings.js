@@ -1,4 +1,4 @@
-import { Button, Modal, Paper, TextInput } from '@mantine/core';
+import { Button, Modal, Paper, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import settingsService from '../services/settings.service';
 import { useEffect, useState } from 'react';

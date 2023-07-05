@@ -49,17 +49,7 @@ export default function TimerSettings({ validateTimer, timer, timerError }) {
 		<>
 			<Container>
 				<form onSubmit={validate}>
-					<Title
-						align="center"
-						sx={(theme) => ({
-							fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-							fontWeight: 900,
-						})}
-					>
-						Join us !
-					</Title>
-
-					<Paper withBorder shadow="md" p={30} mt={30} radius="md">
+					<Paper withBorder shadow="md" mb={25} p={30} radius="md">
 						{timerError && (
 							<Text size="sm" color="red">
 								{timerError}
@@ -79,7 +69,7 @@ export default function TimerSettings({ validateTimer, timer, timerError }) {
 							</Group>
 						</Radio.Group>
 						<NumberInput
-							label="Duration"
+							label="Duration (minutes)"
 							name="duration"
 							min={0}
 							max={60}
