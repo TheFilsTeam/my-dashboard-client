@@ -24,19 +24,20 @@ export default function PomodoroControls({ timerService, timers }) {
 					wrap="wrap"
 				>
 					{/* Timer buttons from settings */}
-					{timerService.getStatus() !== TimerStatus.InProgress && timers && (
-						<>
-							<Flex
-								mih={50}
-								gap="md"
-								m="sm"
-								justify="center"
-								align="center"
-								direction="row"
-								wrap="wrap"
-							>
+					<Flex
+						mih={50}
+						gap="md"
+						m="sm"
+						justify="center"
+						align="center"
+						direction="row"
+						wrap="wrap"
+					>
+						{timers && (
+							<>
 								{timers.map((t) => (
 									<Button
+										disabled={timerService.getStatus() === TimerStatus.InProgress}
 										key={`${t.type}-${t.duration}`}
 										color={t.type === 'Work' ? 'red' : 'green'}
 										miw={80}
@@ -53,9 +54,9 @@ export default function PomodoroControls({ timerService, timers }) {
 										</center>
 									</Button>
 								))}
-							</Flex>
-						</>
-					)}
+							</>
+						)}
+					</Flex>
 
 					{/* Timer display */}
 					<Flex
