@@ -4,22 +4,24 @@ import { useState } from "react";
 
 export default function Meme(){
 
-    const [imageUrl, setImageUrl] = useState("");
-    const [title, setTitle] = useState("");
+    const [meme, setMeme] = useState({});
 
     function getNewThought() {
         backendApi.get("/api/utils/meme")
             .then(response => {
-                setImageUrl(response.data.url);
-                setTitle(response.data.title);
+                setMeme(response.data);
             })
-            .catch(e => setImageUrl(""));
+            .catch(e => setMeme({
+                url: "https://s3.memeshappen.com/memes/SAY-IT-WORKS-IN-MY-MACHINE-ONE-MORE-TIME-meme-55254.jpg",
+                title: "Fail to get random meme"
+            }));
     }
 
     return (
       <Paper maw={600} shadow="xs" p="md">
         <div>
-            <img src={imageUrl} alt={title} style={{maxHeight:"500px"}} />
+            <img src={meme.url} alt={meme.title} title={meme.title} style={{maxHeight:"500px"}} />
+            {meme?.source && <p>Provided with ❤️ by <a href={meme.source} target="_blank" rel="noreferrer">{meme.sourceName}</a></p>}
         </div>
         <Button onClick={getNewThought}>Get a random meme</Button>
       </Paper>
