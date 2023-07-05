@@ -183,7 +183,9 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 							</Paper>
 						)}
 					</Transition>
-					<Flex mr={20}>{timerService.getTime()}</Flex>
+					{timerService.remainingSeconds > 0 && (
+						<Flex mr={20}>{timerService.getTime()}</Flex>
+					)}
 				</Flex>
 				{/* <Container className={classes.header}>
 					<Group spacing={5} className={classes.links}>
