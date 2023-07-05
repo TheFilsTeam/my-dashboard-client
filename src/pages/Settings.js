@@ -146,16 +146,15 @@ export default function Settings() {
 					{timers.length === 0 && <p> No timers defined ⏲️</p>}
 
 					{timers.length !== 0 && (
-						<Paper shadow="xs" p="md" withBorder>
+						<Paper shadow="xs" p="md" withBorder className='items-list'>
 							<ul>
 								{timers.map((t) => (
 									<li key={t._id}>
-										{t.type} / {t.duration / 60}
-										<IconEdit onClick={() => editTimer(t._id)} />
-										<IconTrash
-											className="delete"
-											onClick={() => deleteTimer(t._id)}
-										/>
+										{t.type} ({t.duration / 60} min)
+										<div>
+											<IconEdit onClick={() => editTimer(t._id)} className="hover" />
+											<IconTrash onClick={() => deleteTimer(t._id)} className="hover" />
+										</div>
 									</li>
 								))}
 							</ul>

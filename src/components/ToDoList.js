@@ -40,7 +40,7 @@ export default function ToDoList() {
   };
 
   return (
-    <Paper maw={600} shadow="xs" p="md" id="todo-list">
+    <Paper maw={600} shadow="xs" p="md" class="items-list">
       {/* <Title order={1}>Today to do list</Title> */}
       <Input
         id="add-task"
@@ -64,7 +64,7 @@ export default function ToDoList() {
               className={t.finishedDate ? "done" : "in-progress"}
               onChange={(e) => toggleTaskState(t._id, e.target.checked)}
             />
-            <IconTrash className="delete" onClick={() => deleteTask(t._id)} />
+            <IconTrash className="hover" onClick={() => deleteTask(t._id)} />
           </li>
         ))}
       </ul>

@@ -38,38 +38,39 @@
 }
 
 /* TODO List component */
-#todo-list ul{
+.items-list ul{
   list-style: none;
   padding-left: 0;
 }
 
-#todo-list .done label {
+.items-list .done label {
   text-decoration: line-through;
   color: grey;
 }
 
-#todo-list #add-task {
+.items-list #add-task {
  margin-left: 5px;
 }
 
-#todo-list li {
+.items-list li {
   padding: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#todo-list .delete {
+.items-list .hover {
   color: grey;
   visibility: hidden;
+  cursor: pointer;
   /* margin-left: 50px; */
 }
 
-#todo-list li:hover {
+.items-list li:hover {
   border-radius: 5px;
   background-color: rgb(166, 203, 245);
 }
 
-#todo-list li:hover .delete {
+.items-list li:hover .hover {
   visibility: visible;
 }
