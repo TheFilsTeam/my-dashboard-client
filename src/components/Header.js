@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import {
 	createStyles,
 	Header,
@@ -155,7 +155,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 
 	return (
 		<>
-			<Header height={HEADER_HEIGHT} mb={20} className={classes.root}>
+			<Header height={HEADER_HEIGHT} mb={60} className={classes.root}>
 				<Flex
 					ml={15}
 					className={classes.header}

@@ -32,7 +32,7 @@ export default function Home({ timerService }) {
 			mih={50}
 			gap="md"
 			justify="space-around"
-			align="flex-start"
+			align="center"
 			direction="row"
 			wrap="wrap"
 		>

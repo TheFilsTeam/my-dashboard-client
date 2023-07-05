@@ -1,4 +1,4 @@
-import { Paper, Checkbox, Input } from '@mantine/core';
+import { Paper, Checkbox, Input, Title } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import taskService from '../services/task.service';
 import { IconTrash } from '@tabler/icons-react';
@@ -41,7 +41,7 @@ export default function ToDoList() {
 
 	return (
 		<Paper maw={600} shadow="md" p="md" class="items-list">
-			{/* <Title order={1}>Today to do list</Title> */}
+			<Title order={1}>To do list</Title>
 			<Input
 				id="add-task"
 				label="Add a new task"

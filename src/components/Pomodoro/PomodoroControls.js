@@ -1,4 +1,4 @@
-import { Flex, Button, Center, Paper } from '@mantine/core';
+import { Flex, Button, Center, Paper, Text, Title } from '@mantine/core';
 import React, { useState } from 'react';
 import { TimerStatus } from '../../services/timer.service';
 import CircleTimerProgress from './CircleTimerProgress';
@@ -15,6 +15,7 @@ export default function PomodoroControls({ timerService, timers }) {
 	return (
 		<Center>
 			<Paper maw={600} shadow="md" p="md">
+				<Title order={1}>Timer</Title>
 				<Flex
 					mih={50}
 					gap="md"
