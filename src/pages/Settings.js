@@ -41,7 +41,6 @@ export default function Settings() {
 			.getSettings()
 			.then((response) => {
 				const settings = response.data;
-				console.log('settings', settings);
 				form.setValues(settings);
 				setEmail(settings.email);
 				setTimers(settings.timers);
@@ -132,7 +131,7 @@ export default function Settings() {
 				<h1>Settings</h1>
 				<Flex wrap="wrap" justify="space-around" align="center" direction="row">
 					<Container miw={500} m="lg">
-						<Paper p={'md'} shadow="sm">
+						<Paper p={'md'} shadow="md">
 							<section>
 								<h2>User</h2>
 								<p>your email: {email}</p>
@@ -178,7 +177,7 @@ export default function Settings() {
 										mb={20}
 										wrap="wrap"
 									>
-										<Paper shadow="sm">
+										<Paper shadow="md">
 											<h2>Timers</h2>
 											{timerError && (
 												<Text size="sm" color="red">
@@ -188,7 +187,7 @@ export default function Settings() {
 											{/* WORK TIMERS MAP */}
 											<Container
 												miw={300}
-												shadow="xs"
+												shadow="md"
 												p="md"
 												withBorder
 												className="items-list"
@@ -217,7 +216,7 @@ export default function Settings() {
 											{/* BREAK TIMERS MAP */}
 											<Container
 												miw={300}
-												shadow="xs"
+												shadow="md"
 												p="md"
 												withBorder
 												className="items-list"

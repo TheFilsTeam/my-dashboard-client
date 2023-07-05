@@ -14,7 +14,7 @@ export default function PomodoroControls({ timerService, timers }) {
 
 	return (
 		<Center>
-			<Paper maw={600} shadow="xs" p="md">
+			<Paper maw={600} shadow="md" p="md">
 				<Flex
 					mih={50}
 					gap="md"
@@ -37,7 +37,9 @@ export default function PomodoroControls({ timerService, timers }) {
 							<>
 								{timers.map((t) => (
 									<Button
-										disabled={timerService.getStatus() === TimerStatus.InProgress}
+										disabled={
+											timerService.getStatus() === TimerStatus.InProgress
+										}
 										key={`${t.type}-${t.duration}`}
 										color={t.type === 'Work' ? 'red' : 'green'}
 										miw={80}

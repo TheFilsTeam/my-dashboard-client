@@ -24,7 +24,7 @@ export default function Meme() {
 	}, []);
 
 	return (
-		<Paper shadow="xs" p="md">
+		<Paper shadow="md" p="md">
 			<div>
 				<img
 					src={meme.url}
