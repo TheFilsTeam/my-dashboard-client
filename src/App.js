@@ -23,6 +23,8 @@ function App() {
 		new TimerService(setTimerStatus, setRemainingSeconds)
 	);
 
+	timerService.trackElapsedTime();
+
 	return (
 		<div className="App">
 			<MantineProvider>
@@ -55,7 +57,15 @@ function App() {
 						<Route path="/" element={<Home timerService={timerService} />} />
 						<Route path="/settings" element={<Settings />} />
 						<Route path="/fun" element={<FunForBreaks />} />
-						<Route path="/whiteboard" element={<div style={{width: "100%", height:"90vh"}}>	<Whiteboard /></div>} />
+						<Route
+							path="/whiteboard"
+							element={
+								<div style={{ width: '100%', height: '90vh' }}>
+									{' '}
+									<Whiteboard />
+								</div>
+							}
+						/>
 					</Route>
 				</Routes>
 			</MantineProvider>

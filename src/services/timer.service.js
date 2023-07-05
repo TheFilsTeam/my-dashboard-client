@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 class TimerService {
 	constructor(setTimerStatus, setRemainingSeconds) {
 		this.timer = null;
@@ -6,6 +8,8 @@ class TimerService {
 		this.timerStatus = TimerStatus.Stopped;
 		this.remainingSeconds = 0;
 		this.initialTime = 0;
+		this.elapsedTime = 0;
+		this.startTime = 0;
 	}
 
 	startTimer = (initialTime) => {
@@ -96,7 +100,37 @@ class TimerService {
 	};
 
 	getStatus = () => this.timerStatus;
+
+	trackElapsedTime = () => {
+		useEffect(() => {
+			console.log('timer status: ', this.timerStatus);
+			if (this.timerStatus === TimerStatus.InProgress) {
+				console.log('in progress');
+				this.startTime = Date.now();
+			} else if (
+				(this.timerStatus === TimerStatus.Paused ||
+					this.timerStatus === TimerStatus.Stopped) &&
+				this.startTime !== 0
+			) {
+				this.elapsedTime = Date.now() - this.startTime;
+
+				let elapsedSeconds = Math.round(this.elapsedTime / 1_000);
+				console.log('elapsed seconds', elapsedSeconds);
+				this.saveElapsedTime(elapsedSeconds);
+			}
+		}, [this.timerStatus]);
+	};
+
+	saveElapsedTime = (elapsedSeconds) => {
+		let previousElapsed = JSON.parse(localStorage.getItem('elapsedTime'));
+		localStorage.setItem(
+			'elapsedTime',
+			JSON.stringify(previousElapsed + elapsedSeconds)
+		);
+	};
 }
+
+console.log('local storage elapsed', localStorage.getItem('elapsedTime'));
 
 const TimerStatus = {
 	Stopped: 'Stopped',
