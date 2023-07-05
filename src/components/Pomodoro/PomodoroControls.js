@@ -1,4 +1,4 @@
-import { Flex, Button, NumberInput, Center, Paper } from '@mantine/core';
+import { Flex, Button, Center, Paper } from '@mantine/core';
 import React, { useState } from 'react';
 import { TimerStatus } from '../../services/timer.service';
 import CircleTimerProgress from './CircleTimerProgress';
