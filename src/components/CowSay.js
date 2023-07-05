@@ -22,10 +22,22 @@ export default function CowSay() {
 			.catch((e) => setThought(e.Message));
 	}
 
-	return (
-		<Paper maw={600} shadow="md" p="md">
-			<pre style={{ textAlign: 'left' }}>{thought}</pre>
-			<Button onClick={getNewThought}>New prediction</Button>
-		</Paper>
-	);
+    function getNewThought(url) {
+        backendApi.get(url)
+            .then(response => {
+                const cowSayContent = response.data.text;
+                setThought(cowSayContent);
+                console.log(cowSayContent);
+                return cowSayContent;
+            })
+            .catch(e => setThought(e.Message));
+    }
+
+    return (
+      <Paper maw={600} shadow="md" p="md">
+        <pre style={{ textAlign: 'left'}}>{thought}</pre>
+        <Button onClick={() => getNewThought("/api/utils/cowsay")} m={10}>New prediction</Button>
+        <Button onClick={() => getNewThought("/api/utils/cowgroup")}>Wedding time!</Button>
+      </Paper>
+    );
 }
