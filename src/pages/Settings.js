@@ -1,4 +1,12 @@
-import { Button, Flex, Modal, Paper, Text, TextInput } from '@mantine/core';
+import {
+	Button,
+	Container,
+	Flex,
+	Modal,
+	Paper,
+	Text,
+	TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import settingsService from '../services/settings.service';
 import { useEffect, useState } from 'react';
@@ -12,6 +20,7 @@ export default function Settings() {
 	const [opened, { open, close }] = useDisclosure(false);
 	const [currentTimer, setCurrentTimer] = useState(null);
 	const [timerError, setTimerError] = useState(null);
+	const [settingsError, setSettingsError] = useState(null);
 
 	// #region Form handling
 
@@ -57,6 +66,7 @@ export default function Settings() {
 				const errorDescription = e.response.data.message;
 				// setErrorMessage(errorDescription);
 				console.error(errorDescription);
+				setSettingsError(errorDescription);
 			});
 	};
 
@@ -86,7 +96,10 @@ export default function Settings() {
 				console.log('timer deleted');
 				setTimers(timers.filter((t) => t._id !== id));
 			})
-			.catch((e) => console.log('error', e));
+			.catch((e) => {
+				console.log('error', e);
+				setTimerError(e);
+			});
 	};
 
 	const editTimer = (id) => {
@@ -113,84 +126,145 @@ export default function Settings() {
 	};
 	// #endregion
 
-	console.log('rendered timers:', timers);
-
 	return (
-		<div>
-			<h1>Settings</h1>
-			<p>your email: {email}</p>
+		<>
 			<form onSubmit={saveSettings}>
-				<section>
-					<h2>User</h2>
-					<TextInput
-						label="Name"
-						name="username"
-						placeholder="Your name"
-						{...form.getInputProps('name')}
-						required
-					/>
-					{/* <PasswordInput
+				<h1>Settings</h1>
+				<Flex wrap="wrap" justify="space-around" align="center" direction="row">
+					<Container miw={500} m="lg">
+						<Paper p={'md'} shadow="sm">
+							<section>
+								<h2>User</h2>
+								<p>your email: {email}</p>
+								<TextInput
+									label="Name"
+									name="username"
+									placeholder="Your name"
+									{...form.getInputProps('name')}
+									required
+								/>
+								{/* <PasswordInput
 						label="Password"
 						placeholder="Your password"
 						{...form.getInputProps('password')}
 						required
 						mt="md"
 					/> */}
-				</section>
+							</section>
+							<section>
+								<h2>Spotify</h2>
+								<TextInput
+									label="Spotify playlist"
+									name="spotifyContent"
+									placeholder="a spotify playlist or album url"
+									{...form.getInputProps('spotifyContent')}
+									required
+								/>
+							</section>
+						</Paper>
+					</Container>
 
-				<section>
-					<h2>Timers</h2>
+					<Container m="lg" /* TIMERS */>
+						<section>
+							{timers.length === 0 && <p> No timers defined ⏲️</p>}
 
-					{timers.length === 0 && <p> No timers defined ⏲️</p>}
-
-					{timers.length !== 0 && (
-						<Flex justify="center" align="center" mb={20}>
-							<Paper
-								miw={300}
-								shadow="xs"
-								p="md"
-								withBorder
-								className="items-list"
-							>
-								<ul>
-									{timers.map((t) => (
-										<li key={t._id}>
-											{t.type} ({t.duration / 60} min)
-											<Flex>
-												<IconEdit
-													onClick={() => editTimer(t._id)}
-													className="hover"
-												/>
-												<IconTrash
-													onClick={() => deleteTimer(t._id)}
-													className="hover"
-												/>
-											</Flex>
-										</li>
-									))}
-								</ul>
-								<Button onClick={addNewTimer}>Create new timer</Button>
-							</Paper>
-						</Flex>
+							{timers.length !== 0 && (
+								<>
+									<Flex
+										direction={'row'}
+										justify="center"
+										align="center"
+										mt={20}
+										mb={20}
+										wrap="wrap"
+									>
+										<Paper shadow="sm">
+											<h2>Timers</h2>
+											{timerError && (
+												<Text size="sm" color="red">
+													{timerError}
+												</Text>
+											)}
+											{/* WORK TIMERS MAP */}
+											<Container
+												miw={300}
+												shadow="xs"
+												p="md"
+												withBorder
+												className="items-list"
+											>
+												<Text>Work</Text>
+												{timers
+													.filter((t) => t.type === 'Work')
+													.map((t) => (
+														<ul>
+															<li key={t._id}>
+																{t.type} ({t.duration / 60} min)
+																<Flex>
+																	<IconEdit
+																		onClick={() => editTimer(t._id)}
+																		className="hover"
+																	/>
+																	<IconTrash
+																		onClick={() => deleteTimer(t._id)}
+																		className="hover"
+																	/>
+																</Flex>
+															</li>
+														</ul>
+													))}
+											</Container>
+											{/* BREAK TIMERS MAP */}
+											<Container
+												miw={300}
+												shadow="xs"
+												p="md"
+												withBorder
+												className="items-list"
+											>
+												<Text>Break</Text>
+												{timers
+													.filter((t) => t.type === 'Break')
+													.map((t) => (
+														<ul>
+															<li key={t._id}>
+																{t.type} ({t.duration / 60} min)
+																<Flex>
+																	<IconEdit
+																		onClick={() => editTimer(t._id)}
+																		className="hover"
+																	/>
+																	<IconTrash
+																		onClick={() => deleteTimer(t._id)}
+																		className="hover"
+																	/>
+																</Flex>
+															</li>
+														</ul>
+													))}
+											</Container>
+											<Button mb={20} onClick={addNewTimer}>
+												Create new timer
+											</Button>
+										</Paper>
+									</Flex>
+								</>
+							)}
+						</section>
+					</Container>
+				</Flex>
+				<Container>
+					{settingsError && (
+						<Text size="sm" color="red">
+							{settingsError}
+						</Text>
 					)}
-				</section>
 
-				<section>
-					<h2>Spotify</h2>
-					<TextInput
-						label="Spotify playlist"
-						name="spotifyContent"
-						placeholder="a spotify playlist or album url"
-						{...form.getInputProps('spotifyContent')}
-						required
-					/>
-				</section>
-
-				<Button fullWidth mt="xl" type="submit">
-					Save Settings
-				</Button>
+					<Button /* fullWidth */ mt="xl" type="submit">
+						Save Settings
+					</Button>
+				</Container>
 			</form>
-
 			<Modal
 				opened={opened}
 				onClose={close}
@@ -212,6 +286,6 @@ export default function Settings() {
 			{/* <Group position="center">
 				<Button onClick={open}>Open centered Modal</Button>
 			</Group> */}
-		</div>
+		</>
 	);
 }
