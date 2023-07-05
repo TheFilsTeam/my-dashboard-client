@@ -30,6 +30,7 @@ export default function Settings() {
 		initialValues: {
 			name: '',
 			/* password: '', */
+			friends: '',
 			spotifyContent: '',
 		},
 
@@ -151,6 +152,13 @@ export default function Settings() {
 						required
 						mt="md"
 					/> */}
+							<TextInput
+									label="Friends"
+									name="friends"
+									placeholder="Your friends names (separated by ';')"
+									{...form.getInputProps('friends')}
+									required
+								/>
 							</section>
 							<section>
 								<h2>Spotify</h2>
