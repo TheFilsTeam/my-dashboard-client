@@ -1,4 +1,4 @@
-import { Button, Modal, Paper, Text, TextInput } from '@mantine/core';
+import { Button, Flex, Modal, Paper, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import settingsService from '../services/settings.service';
 import { useEffect, useState } from 'react';
@@ -144,21 +144,35 @@ export default function Settings() {
 					{timers.length === 0 && <p> No timers defined ⏲️</p>}
 
 					{timers.length !== 0 && (
-						<Paper shadow="xs" p="md" withBorder className='items-list'>
-							<ul>
-								{timers.map((t) => (
-									<li key={t._id}>
-										{t.type} ({t.duration / 60} min)
-										<div>
-											<IconEdit onClick={() => editTimer(t._id)} className="hover" />
-											<IconTrash onClick={() => deleteTimer(t._id)} className="hover" />
-										</div>
-									</li>
-								))}
-							</ul>
-						</Paper>
+						<Flex justify="center" align="center" mb={20}>
+							<Paper
+								miw={300}
+								shadow="xs"
+								p="md"
+								withBorder
+								className="items-list"
+							>
+								<ul>
+									{timers.map((t) => (
+										<li key={t._id}>
+											{t.type} ({t.duration / 60} min)
+											<Flex>
+												<IconEdit
+													onClick={() => editTimer(t._id)}
+													className="hover"
+												/>
+												<IconTrash
+													onClick={() => deleteTimer(t._id)}
+													className="hover"
+												/>
+											</Flex>
+										</li>
+									))}
+								</ul>
+								<Button onClick={addNewTimer}>Create new timer</Button>
+							</Paper>
+						</Flex>
 					)}
-					<Button onClick={addNewTimer}>Create new timer</Button>
 				</section>
 
 				<section>
