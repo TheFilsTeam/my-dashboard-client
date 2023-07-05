@@ -47,6 +47,7 @@ export default function PomodoroControls({ timerService, timers }) {
 										onClick={() => {
 											/* setSeconds(+t.duration); */
 											timerService.setInitialTime(+t.duration);
+											timerService.timerType = t.type;
 										}}
 									>
 										<center>

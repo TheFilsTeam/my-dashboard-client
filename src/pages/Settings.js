@@ -24,6 +24,8 @@ export default function Settings() {
 
 	// #region Form handling
 
+	console.log('timers: ', timers);
+
 	const form = useForm({
 		initialValues: {
 			name: '',

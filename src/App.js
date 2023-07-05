@@ -24,6 +24,7 @@ function App() {
 	);
 
 	timerService.trackElapsedTime();
+	console.log('timer type: ', timerService.timerType);
 
 	return (
 		<div className="App">

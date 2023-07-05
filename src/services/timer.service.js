@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 class TimerService {
 	constructor(setTimerStatus, setRemainingSeconds) {
 		this.timer = null;
+		this.timerType = 'Break';
 		this.setTimerStatus = setTimerStatus;
 		this.setRemainingSeconds = setRemainingSeconds;
 		this.timerStatus = TimerStatus.Stopped;
@@ -60,6 +61,7 @@ class TimerService {
 		this.remainingSeconds = this.initialTime;
 		this.setRemainingSeconds(this.remainingSeconds);
 		this.setTimerStatus(this.timerStatus);
+		this.timerType = 'Break';
 	};
 
 	toggleTimer = () => {
@@ -69,6 +71,12 @@ class TimerService {
 				: TimerStatus.Paused;
 
 		this.setTimerStatus(this.timerStatus);
+
+		if (this.timerType === 'Break') {
+			this.timerType = 'Work';
+		} else if (this.timerType === 'Work') {
+			this.timerType = 'Break';
+		}
 	};
 
 	finishedTimer = () => {
@@ -122,11 +130,28 @@ class TimerService {
 	};
 
 	saveElapsedTime = (elapsedSeconds) => {
-		let previousElapsed = JSON.parse(localStorage.getItem('elapsedTime'));
-		localStorage.setItem(
-			'elapsedTime',
-			JSON.stringify(previousElapsed + elapsedSeconds)
+		let previousElapsedWorking = JSON.parse(
+			localStorage.getItem('workingTime')
 		);
+		let previousElapsedBreaking = JSON.parse(
+			localStorage.getItem('breakingTime')
+		);
+
+		console.log('prev working', previousElapsedWorking);
+		console.log('prev breaking', previousElapsedBreaking);
+
+		if (this.timerType === 'Work') {
+			localStorage.setItem(
+				'breakingTime',
+				JSON.stringify(previousElapsedWorking + elapsedSeconds)
+			);
+			console.log('breakingTime', localStorage.getItem('workingTime'));
+		} else if (this.timerType === 'Break') {
+			localStorage.setItem(
+				'workingTime',
+				JSON.stringify(previousElapsedBreaking + elapsedSeconds)
+			);
+		}
 	};
 }
 
