@@ -1,7 +1,7 @@
 import { MantineProvider } from '@mantine/core';
 
-import React from 'react';
-import { useMantineTheme } from '@mantine/core';
+import React, { useEffect, useState } from 'react';
+import { TimerService, TimerStatus } from '../services/timer.service';
 
 const greenTheme = {
 	colorScheme: 'light',
@@ -80,12 +80,22 @@ const redTheme = {
 	},
 };
 
-export default function ThemeProvider(props) {
+export default function ThemeProvider({ children, timerService }) {
+	const [theme, setTheme] = useState(greenTheme);
+
+	useEffect(() => {
+		if (timerService.timerType === 'Work') {
+			setTheme(redTheme);
+		} else if (timerService.timerType === 'Break') {
+			setTheme(greenTheme);
+		}
+	}, [timerService.timerType]);
+
 	return (
 		<>
-			<MantineProvider theme={redTheme}>{props.children}</MantineProvider>
+			<MantineProvider theme={theme}>{children}</MantineProvider>
 		</>
 	);
 }
 
-export { ThemeProvider, greenTheme };
+export { ThemeProvider };

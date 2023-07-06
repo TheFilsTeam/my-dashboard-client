@@ -27,7 +27,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<ThemeProvider>
+			<ThemeProvider timerService={timerService}>
 				<Routes>
 					<Route
 						path="/login"
