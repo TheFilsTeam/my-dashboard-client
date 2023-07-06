@@ -40,8 +40,16 @@ export default function ToDoList() {
 	};
 
 	return (
-		<Paper maw={600} shadow='md' p="md" className="items-list todo-list">
-			<Title order={1} color='grey' size={15} align='left'>📃 To-do list</Title>
+		<Paper
+			maw={600}
+			miw={300}
+			shadow="md"
+			p="md"
+			className="items-list todo-list"
+		>
+			<Title order={1} color="grey" size={15} align="left">
+				📃 To-do list
+			</Title>
 			<Input
 				id="add-task"
 				label="Add a new task"
