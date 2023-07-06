@@ -1,7 +1,7 @@
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { MantineProvider } from '@mantine/core';
 
 import Shell from './components/Shell';
