@@ -115,7 +115,7 @@ const links = [
 	{
 		label: 'Settings',
 		link: '/settings',
-	}
+	},
 ];
 
 export function HeaderResponsive({ timerService, timerTotal }) {
@@ -146,7 +146,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 
 	return (
 		<>
-			<Header height={HEADER_HEIGHT} mb={60} className={classes.root}>
+			<Header height={HEADER_HEIGHT} mb={0} className={classes.root}>
 				<Flex
 					ml={15}
 					className={classes.header}
@@ -177,15 +177,27 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 						)}
 					</Transition>
 					<Group spacing={5}>
-							<span>{timerService.timerStatus === TimerStatus.InProgress && `${timerService.getFriendlyType()}${timerService.getTime()}`}</span>
+						<span>
+							{timerService.timerStatus === TimerStatus.InProgress &&
+								`${timerService.getFriendlyType()}${timerService.getTime()}`}
+						</span>
 					</Group>
 					<Group spacing={5}>
-							<span>Welcome, <i>{user.name}</i></span>
-							<a href='/logout' className={cx(classes.link)} title='Logout' onClick={(event) => {
-									event.preventDefault();
-									close();
-									logOutUser();
-								}}><IconLogout /></a>
+						<span>
+							Welcome, <i>{user.name}</i>
+						</span>
+						<a
+							href="/logout"
+							className={cx(classes.link)}
+							title="Logout"
+							onClick={(event) => {
+								event.preventDefault();
+								close();
+								logOutUser();
+							}}
+						>
+							<IconLogout />
+						</a>
 					</Group>
 				</Flex>
 				{/* <Container className={classes.header}>
@@ -215,7 +227,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 				<TimerBar timerService={timerService} TimerStatus={TimerStatus} />
 			</Header>
 
-			<Container fluid>
+			<Container p="lg" m={0} fluid>
 				<Outlet />
 			</Container>
 		</>

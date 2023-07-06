@@ -133,12 +133,12 @@ export default function Settings() {
 	// #endregion
 
 	let playlistId = undefined;
-	console.log("spotify url", form.getInputProps('spotifyContent'));
-	if(form.getInputProps('spotifyContent').value) {
-		try{
+	console.log('spotify url', form.getInputProps('spotifyContent'));
+	if (form.getInputProps('spotifyContent').value) {
+		try {
 			playlistId = form.getInputProps('spotifyContent').value.split('/').pop();
-		}catch(e){
-			console.log("spotify url error", e);
+		} catch (e) {
+			console.log('spotify url error', e);
 		}
 	}
 
@@ -151,7 +151,8 @@ export default function Settings() {
 						<Paper p={'md'} shadow="md">
 							<section>
 								<h2>👤 User</h2>
-								<p>your email: {email}</p>
+								<p>{email}</p>
+
 								<TextInput
 									label="Your name"
 									name="username"
@@ -170,7 +171,8 @@ export default function Settings() {
 									label="Your friends"
 									name="friends"
 									placeholder="Your friends names (separated by ';')"
-									{...form.getInputProps('friends')} />
+									{...form.getInputProps('friends')}
+								/>
 							</section>
 							<section>
 								<h2>🎵 Spotify</h2>
@@ -181,7 +183,13 @@ export default function Settings() {
 									{...form.getInputProps('spotifyContent')}
 									required
 								/>
-								{playlistId && <a href={`https://stevenaleong.com/tools/spotifyplaylistrandomizer?shuffle=${playlistId}`}>Randomize playlist</a>}
+								{playlistId && (
+									<a
+										href={`https://stevenaleong.com/tools/spotifyplaylistrandomizer?shuffle=${playlistId}`}
+									>
+										Randomize playlist
+									</a>
+								)}
 							</section>
 						</Paper>
 					</Container>
@@ -214,7 +222,9 @@ export default function Settings() {
 												p="md"
 												className="items-list"
 											>
-												<Text>⚒️ Work</Text>
+												<Text>
+													<h3 style={{ marginTop: '0px' }}>⚒️ Work</h3>
+												</Text>
 												{timers
 													.filter((t) => t.type === 'Work')
 													.map((t) => (
@@ -242,7 +252,9 @@ export default function Settings() {
 												p="md"
 												className="items-list"
 											>
-												<Text>🏖️Break</Text>
+												<Text>
+													<h3 style={{ marginTop: '0px' }}>🏖️Break</h3>
+												</Text>
 												{timers
 													.filter((t) => t.type === 'Break')
 													.map((t) => (
@@ -285,7 +297,7 @@ export default function Settings() {
 						</Text>
 					)}
 
-					<Button /* fullWidth */ mt="xl" type="submit">
+					<Button /* fullWidth */ m="xl" type="submit">
 						Save Settings
 					</Button>
 				</Container>
