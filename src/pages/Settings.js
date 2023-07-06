@@ -23,6 +23,9 @@ export default function Settings() {
 	const [settingsError, setSettingsError] = useState(null);
 	const [settingsSuccess, setSettingsSuccess] = useState(null);
 
+	const workingMinutes = Math.round(localStorage.getItem('workingTime') / 60);
+	const breakingMinutes = Math.round(localStorage.getItem('breakingTime') / 60);
+
 	// #region Form handling
 
 	console.log('timers: ', timers);
@@ -152,6 +155,12 @@ export default function Settings() {
 							<section>
 								<h2>👤 User</h2>
 								<p>{email}</p>
+								<p>
+									You have <span style={{ color: '#fa5252' }}>worked</span> with
+									us for {workingMinutes} minutes and
+									<span style={{ color: '#40c057' }}> rested</span> for
+									{' ' + breakingMinutes} minutes
+								</p>
 
 								<TextInput
 									label="Your name"
