@@ -41,3 +41,8 @@
 .items-list li:hover .hover {
   visibility: visible;
 }
+
+.todo-list {
+  max-width: 400px;
+  text-align: left;
+}
