@@ -176,13 +176,13 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 							</Paper>
 						)}
 					</Transition>
+					<Group spacing={5}></Group>
 					<Group spacing={5}>
 						<span>
 							{timerService.timerStatus === TimerStatus.InProgress &&
-								`${timerService.getFriendlyType()}${timerService.getTime()}`}
+								`${timerService.getTime()}  ${timerService.getFriendlyType()}` +
+									' | '}
 						</span>
-					</Group>
-					<Group spacing={5}>
 						<span>
 							Welcome, <i>{user.name}</i>
 						</span>
