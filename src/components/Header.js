@@ -185,7 +185,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 							<span>{timerService.timerStatus === TimerStatus.InProgress && `${timerService.getFriendlyType()}${timerService.getTime()}`}</span>
 					</Group>
 					<Group spacing={5}>
-							<span><i>{user.name}</i></span>
+							<span>Welcome, <i>{user.name}</i></span>
 							<a href='/logout' className={cx(classes.link)} title='Logout' onClick={(event) => {
 									event.preventDefault();
 									close();
