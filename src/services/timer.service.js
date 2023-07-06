@@ -108,6 +108,7 @@ class TimerService {
 	};
 
 	getStatus = () => this.timerStatus;
+	getFriendlyType = () => this.timerType === TimerType.Work ? "⚒️" : "🏖️";
 
 	trackElapsedTime = () => {
 		useEffect(() => {
@@ -163,4 +164,9 @@ const TimerStatus = {
 	Paused: 'Paused',
 };
 
-export { TimerService, TimerStatus };
+const TimerType = {
+	Work: 'Work',
+	Break: 'Break',
+};
+
+export { TimerService, TimerStatus, TimerType };

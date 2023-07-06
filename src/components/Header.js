@@ -16,6 +16,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import TimerBar from './Pomodoro/TimerBar';
 import { TimerStatus } from '../services/timer.service';
+import { IconLogout } from '@tabler/icons-react';
 
 const HEADER_HEIGHT = rem(60);
 
@@ -104,10 +105,6 @@ const links = [
 		link: '/',
 	},
 	{
-		label: 'Settings',
-		link: '/settings',
-	},
-	{
 		label: 'Fun for breaks',
 		link: '/fun',
 	},
@@ -115,7 +112,10 @@ const links = [
 		label: 'Whiteboard',
 		link: '/whiteboard',
 	},
-	{ label: 'Logout', link: '/logout' },
+	{
+		label: 'Settings',
+		link: '/settings',
+	}
 ];
 
 export function HeaderResponsive({ timerService, timerTotal }) {
@@ -160,6 +160,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 				>
 					<Group spacing={5} className={classes.links}>
 						<Image mr={20} width={32} height={32} src="./favicon-32x32.png" />
+						<span>Focus Dashboard</span>
 						{items}
 					</Group>
 					<Burger
@@ -180,9 +181,17 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 							</Paper>
 						)}
 					</Transition>
-					{timerService.remainingSeconds > 0 && (
-						<Flex mr={20}>{timerService.getTime()}</Flex>
-					)}
+					<Group spacing={5}>
+							<span>{timerService.timerStatus === TimerStatus.InProgress && `${timerService.getFriendlyType()}${timerService.getTime()}`}</span>
+					</Group>
+					<Group spacing={5}>
+							<span><i>{user.name}</i></span>
+							<a href='/logout' className={cx(classes.link)} title='Logout' onClick={(event) => {
+									event.preventDefault();
+									close();
+									logOutUser();
+								}}><IconLogout /></a>
+					</Group>
 				</Flex>
 				{/* <Container className={classes.header}>
 					<Group spacing={5} className={classes.links}>
