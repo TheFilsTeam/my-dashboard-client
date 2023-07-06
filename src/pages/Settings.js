@@ -21,6 +21,7 @@ export default function Settings() {
 	const [currentTimer, setCurrentTimer] = useState(null);
 	const [timerError, setTimerError] = useState(null);
 	const [settingsError, setSettingsError] = useState(null);
+	const [settingsSuccess, setSettingsSuccess] = useState(null);
 
 	// #region Form handling
 
@@ -58,11 +59,14 @@ export default function Settings() {
 	const saveSettings = (e) => {
 		e.preventDefault();
 		console.log(`req.body (data to update)`, form.values);
+		setSettingsSuccess(null);
+		setSettingsError(null);
 
 		settingsService
 			.updateSettings(form.values)
 			.then((response) => {
-				console.log(response.data);
+				console.log('saved', response.data);
+				setSettingsSuccess('Settings updated successfully');
 			})
 			.catch((e) => {
 				const errorDescription = e.response.data.message;
@@ -84,10 +88,10 @@ export default function Settings() {
 
 	const createTimer = (newTimer) => {
 		//TODO Call to api
-		settingsService.createTimer(newTimer).then((response) => {});
-
-		setTimers([...timers, newTimer]);
-		close();
+		settingsService.createTimer(newTimer).then((response) => {
+			setTimers([...timers, response.data]);
+			close();
+		});
 	};
 
 	const deleteTimer = (id) => {
@@ -152,7 +156,7 @@ export default function Settings() {
 						required
 						mt="md"
 					/> */}
-							<TextInput
+								<TextInput
 									label="Friends"
 									name="friends"
 									placeholder="Your friends names (separated by ';')"
@@ -199,7 +203,6 @@ export default function Settings() {
 												miw={300}
 												shadow="md"
 												p="md"
-												withBorder
 												className="items-list"
 											>
 												<Text>⚒️ Work</Text>
@@ -228,7 +231,6 @@ export default function Settings() {
 												miw={300}
 												shadow="md"
 												p="md"
-												withBorder
 												className="items-list"
 											>
 												<Text>🏖️Break</Text>
@@ -264,8 +266,13 @@ export default function Settings() {
 				</Flex>
 				<Container>
 					{settingsError && (
-						<Text size="sm" color="red">
+						<Text size="md" color="red">
 							{settingsError}
+						</Text>
+					)}
+					{settingsSuccess && (
+						<Text size="md" color="green">
+							{settingsSuccess}
 						</Text>
 					)}
 
