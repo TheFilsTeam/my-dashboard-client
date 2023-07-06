@@ -15,7 +15,7 @@ export default function PomodoroControls({ timerService, timers }) {
 	return (
 		<Center>
 			<Paper maw={600} shadow="md" p="md">
-				<Title order={1}>Timer</Title>
+				<Title order={1} color='grey' size={15} align='left'>⏱️ Timer</Title>
 				<Flex
 					mih={50}
 					gap="md"

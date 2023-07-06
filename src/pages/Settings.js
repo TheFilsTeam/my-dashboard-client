@@ -136,7 +136,7 @@ export default function Settings() {
 					<Container miw={500} m="lg">
 						<Paper p={'md'} shadow="md">
 							<section>
-								<h2>User</h2>
+								<h2>👤 User</h2>
 								<p>your email: {email}</p>
 								<TextInput
 									label="Name"
@@ -161,7 +161,7 @@ export default function Settings() {
 								/>
 							</section>
 							<section>
-								<h2>Spotify</h2>
+								<h2>🎵 Spotify</h2>
 								<TextInput
 									label="Spotify playlist"
 									name="spotifyContent"
@@ -188,7 +188,7 @@ export default function Settings() {
 										wrap="wrap"
 									>
 										<Paper shadow="md">
-											<h2>Timers</h2>
+											<h2>⏱️ Timers</h2>
 											{timerError && (
 												<Text size="sm" color="red">
 													{timerError}
@@ -202,7 +202,7 @@ export default function Settings() {
 												withBorder
 												className="items-list"
 											>
-												<Text>Work</Text>
+												<Text>⚒️ Work</Text>
 												{timers
 													.filter((t) => t.type === 'Work')
 													.map((t) => (
@@ -231,7 +231,7 @@ export default function Settings() {
 												withBorder
 												className="items-list"
 											>
-												<Text>Break</Text>
+												<Text>🏖️Break</Text>
 												{timers
 													.filter((t) => t.type === 'Break')
 													.map((t) => (
