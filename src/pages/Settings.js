@@ -132,6 +132,16 @@ export default function Settings() {
 	};
 	// #endregion
 
+	let playlistId = undefined;
+	console.log("spotify url", form.getInputProps('spotifyContent'));
+	if(form.getInputProps('spotifyContent').value) {
+		try{
+			playlistId = form.getInputProps('spotifyContent').value.split('/').pop();
+		}catch(e){
+			console.log("spotify url error", e);
+		}
+	}
+
 	return (
 		<>
 			<form onSubmit={saveSettings}>
@@ -143,7 +153,7 @@ export default function Settings() {
 								<h2>👤 User</h2>
 								<p>your email: {email}</p>
 								<TextInput
-									label="Name"
+									label="Your name"
 									name="username"
 									placeholder="Your name"
 									{...form.getInputProps('name')}
@@ -157,22 +167,21 @@ export default function Settings() {
 						mt="md"
 					/> */}
 								<TextInput
-									label="Friends"
+									label="Your friends"
 									name="friends"
 									placeholder="Your friends names (separated by ';')"
-									{...form.getInputProps('friends')}
-									required
-								/>
+									{...form.getInputProps('friends')} />
 							</section>
 							<section>
 								<h2>🎵 Spotify</h2>
 								<TextInput
-									label="Spotify playlist"
+									label="Spotify playlist url"
 									name="spotifyContent"
-									placeholder="a spotify playlist or album url"
+									placeholder="a spotify playlist url"
 									{...form.getInputProps('spotifyContent')}
 									required
 								/>
+								{playlistId && <a href={`https://stevenaleong.com/tools/spotifyplaylistrandomizer?shuffle=${playlistId}`}>Randomize playlist</a>}
 							</section>
 						</Paper>
 					</Container>
