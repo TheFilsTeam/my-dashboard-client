@@ -48,3 +48,106 @@
   max-width: 400px;
   text-align: left;
 }
+
+
+/* Mouse Game */
+
+:root {
+  --cell-size: 51px;
+  --player-size: 51px;
+  --offset: calc((var(--cell-size) - var(--player-size)) / 2);
+  --border-size: 2px;
+  --grid-columns: 6;
+  --grid-rows: 6;
+  --back-color: #11191f;
+}
+
+
+* {
+  user-select: none;
+}
+
+.mouse-game {
+  color: white;
+  background-color: #11191f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+select,option,input {
+  background-color: var(--back-color);
+  color: white;
+}
+
+div#board {
+  width: calc(6 * var(--cell-size) + 7 * var(--border-size));
+  height: calc(6 * var(--cell-size) + 7 * var(--border-size));
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+div.pixel {
+  width: var(--border-size);
+  height: var(--border-size);
+  background-color: white;
+}
+
+div.border-horizontal {
+  width: var(--cell-size);
+  height: var(--border-size);
+  background-color: #00A6ED;
+}
+
+div.border-vertical {
+  width: var(--border-size);
+  height: var(--cell-size);
+  background-color: #00A6ED;
+}
+
+div.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  font-size: var(--cell-size);
+  padding: 0px;
+  margin: 0px;
+  text-align: left;
+  vertical-align: top;
+}
+
+div.wall {
+  background-color: white;
+}
+
+.left {
+  background-image: url("../public/arrow_left.png");
+}
+
+.right {
+  background-image: url("../public//arrow_right.png");
+}
+
+.down {
+  background-image: url("../public//arrow_bottom.png");
+}
+
+.up {
+  background-image: url("../public//arrow_up.png");
+}
+
+#start {
+  background-color: grey;
+}
+
+#end {
+  background-color: #00A6ED;
+}
+
+#player {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: var(--player-size);
+  height: var(--player-size);
+}
