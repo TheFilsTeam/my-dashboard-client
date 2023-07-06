@@ -136,7 +136,7 @@ export default function Settings() {
 		<>
 			<form onSubmit={saveSettings}>
 				<h1>Settings</h1>
-				<Flex wrap="wrap" justify="space-around" align="center" direction="row">
+				<Flex wrap="wrap" justify="space-around" direction="row">
 					<Container miw={500} m="lg">
 						<Paper p={'md'} shadow="md">
 							<section>
