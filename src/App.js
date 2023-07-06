@@ -15,6 +15,7 @@ import { TimerService, TimerStatus } from './services/timer.service';
 import { HeaderResponsive } from './components/Header';
 import FunForBreaks from './pages/FunForBreaks';
 import { Whiteboard } from 'react-whiteboard-pdf';
+import ThemeProvider from './context/mantineTheme.context';
 
 function App() {
 	const [timerStatus, setTimerStatus] = useState(TimerStatus.Stopped);
@@ -28,7 +29,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<MantineProvider>
+			<ThemeProvider>
 				<Routes>
 					<Route
 						path="/login"
@@ -69,7 +70,7 @@ function App() {
 						/>
 					</Route>
 				</Routes>
-			</MantineProvider>
+			</ThemeProvider>
 		</div>
 	);
 }

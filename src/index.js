@@ -6,15 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProviderWrapper } from './context/auth.context';
+import ThemeProvider from './context/mantineTheme.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<AuthProviderWrapper>
-				<MantineProvider withGlobalStyles withNormalizeCSS>
-					<App />
-				</MantineProvider>
+				<App />
 			</AuthProviderWrapper>
 		</BrowserRouter>
 	</React.StrictMode>
