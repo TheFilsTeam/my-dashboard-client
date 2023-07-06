@@ -2,9 +2,7 @@ import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import { MantineProvider } from '@mantine/core';
 
-import Shell from './components/Shell';
 import SignIn from './pages/SignIn';
 import CreateAccount from './pages/CreateAccount';
 import IsPrivate from './components/IsPrivate';
@@ -51,7 +49,6 @@ function App() {
 						path="/"
 						element={
 							<IsPrivate>
-								{/* <Shell timerService={timerService} /> */}
 								<HeaderResponsive timerService={timerService} />
 							</IsPrivate>
 						}
