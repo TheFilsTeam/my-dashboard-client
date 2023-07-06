@@ -10,6 +10,7 @@ import {
 	rem,
 	Flex,
 	Image,
+	Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -154,8 +155,8 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 					justify="space-between"
 				>
 					<Group spacing={5} className={classes.links}>
-						<Image mr={20} width={32} height={32} src="./favicon-32x32.png" />
-						<span>Focus Dashboard</span>
+						<Image width={32} height={32} src="./favicon-32x32.png" />
+						<Text mr={20}>Focus Dashboard</Text>
 						{items}
 					</Group>
 					<Burger
