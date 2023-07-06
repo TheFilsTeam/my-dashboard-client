@@ -10,18 +10,6 @@ export default function CowSay() {
 	const [thought, setThought] = useState('Wait! The cow will say something...');
 	// useEffect(getNewThought, []);
 
-	function getNewThought() {
-		backendApi
-			.get('/api/utils/cowsay')
-			.then((response) => {
-				const cowSayContent = response.data.text;
-				setThought(cowSayContent);
-				console.log(cowSayContent);
-				return cowSayContent;
-			})
-			.catch((e) => setThought(e.Message));
-	}
-
     function getNewThought(url) {
         backendApi.get(url)
             .then(response => {
@@ -36,9 +24,9 @@ export default function CowSay() {
     return (
       <Paper maw={600} shadow="md" p="md">
       	<Title order={1} color='grey' size={15} align='left'>🐮💬</Title>
-        <pre style={{ textAlign: 'left'}}>{thought}</pre>
         <Button onClick={() => getNewThought("/api/utils/cowsay")} m={10}>New prediction</Button>
         <Button onClick={() => getNewThought("/api/utils/cowgroup")}>Wedding time!</Button>
+        <pre style={{ textAlign: 'left'}}>{thought}</pre>
       </Paper>
     );
 }
