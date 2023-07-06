@@ -7,7 +7,7 @@ export default function CircleTimerProgress({ timerService }) {
 	const remainingPercent =
 		(timerService.remainingSeconds * 100) / timerService.initialTime;
 	const lastSeconds = Math.min(60, timerService.remainingSeconds);
-	const lastPercents = 100 * lastSeconds / timerService.initialTime;
+	const lastPercents = (100 * lastSeconds) / timerService.initialTime;
 
 	return (
 		<RingProgress
@@ -32,10 +32,13 @@ export default function CircleTimerProgress({ timerService }) {
 			sections={[
 				{
 					value: lastPercents,
-					color: 'red',
+					color: 'blue',
 				},
 				{
-					value: lastSeconds === timerService.remainingSeconds ? 0 : remainingPercent - lastPercents,
+					value:
+						lastSeconds === timerService.remainingSeconds
+							? 0
+							: remainingPercent /* - lastPercents, */,
 					color: 'blue',
 				},
 				{
