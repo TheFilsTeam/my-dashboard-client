@@ -43,11 +43,7 @@ export default function PomodoroControls({ timerService, timers }) {
 									key={`${t.type}-${t.duration}`}
 									color={t.type === 'Work' ? 'red' : 'green'}
 									miw={80}
-									onClick={() => {
-										/* setSeconds(+t.duration); */
-										timerService.setInitialTime(+t.duration);
-										timerService.timerType = t.type;
-									}}
+									onClick={() => {timerService.setInitialTime(+t.duration, t.type)}}
 								>
 									<center>
 										{t.type} <br />{' '}

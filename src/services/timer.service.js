@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 class TimerService {
 	constructor(setTimerStatus, setRemainingSeconds) {
 		this.timer = null;
-		this.timerType = 'Break';
+		this.timerType = TimerType.Break;
 		this.setTimerStatus = setTimerStatus;
 		this.setRemainingSeconds = setRemainingSeconds;
 		this.timerStatus = TimerStatus.Stopped;
@@ -43,12 +43,13 @@ class TimerService {
 		}, 1000);
 	};
 
-	setInitialTime = (initialTime) => {
+	setInitialTime = (initialTime, timerType) => {
 		if (this.timer !== null || initialTime === 0) {
 			return;
 		}
 
 		this.initialTime = initialTime;
+		this.timerType = timerType;
 		this.remainingSeconds = initialTime;
 		this.setRemainingSeconds(this.remainingSeconds);
 	};
@@ -61,7 +62,6 @@ class TimerService {
 		this.remainingSeconds = this.initialTime;
 		this.setRemainingSeconds(this.remainingSeconds);
 		this.setTimerStatus(this.timerStatus);
-		this.timerType = 'Break';
 	};
 
 	toggleTimer = () => {
@@ -72,29 +72,28 @@ class TimerService {
 
 		this.setTimerStatus(this.timerStatus);
 
-		if (this.timerType === 'Break') {
-			this.timerType = 'Work';
-		} else if (this.timerType === 'Work') {
-			this.timerType = 'Break';
+		if (this.timerType === TimerType.Break) {
+			this.timerType = TimerType.Work;
+		} else if (this.timerType === TimerType.Work) {
+			this.timerType = TimerType.Break;
 		}
-	};
+	};	
 
 	finishedTimer = () => {
+		const message = this.timerType === TimerType.Break ? 'I hope you had a good break...💪' : 'Good work session!👍';
 		if (Notification.permission === 'granted') {
-			var options = {
-				body: 'Please take a break!',
+			let options = this.timerType === TimerType.Break ? {
+				body: '⚒️ Now it\'s time to focus! ⚒️',
+				icon: './hourglass.png',
+			} : {
+				body: '🏖️ Please take a break! 🏖️',
 				icon: './hourglass.png',
 			};
-			new Notification('Time is up!', options);
+			new Notification(message, options);
 		} else {
-			alert('Timer finished!');
+			alert(message);
 		}
 	};
-
-	// updateRemainingSeconds(seconds) {
-	//     this.remainingSeconds = seconds;
-	//     console.log('timer:', seconds);
-	// }
 
 	getTime = () => {
 		return this._timeFormat(this.remainingSeconds);
@@ -141,13 +140,13 @@ class TimerService {
 		console.log('prev working', previousElapsedWorking);
 		console.log('prev breaking', previousElapsedBreaking);
 
-		if (this.timerType === 'Work') {
+		if (this.timerType === TimerType.Work) {
 			localStorage.setItem(
 				'breakingTime',
 				JSON.stringify(previousElapsedWorking + elapsedSeconds)
 			);
 			console.log('breakingTime', localStorage.getItem('workingTime'));
-		} else if (this.timerType === 'Break') {
+		} else if (this.timerType === TimerType.Break) {
 			localStorage.setItem(
 				'workingTime',
 				JSON.stringify(previousElapsedBreaking + elapsedSeconds)
