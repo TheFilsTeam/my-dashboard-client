@@ -35,7 +35,9 @@
 
 .items-list li:hover {
   border-radius: 5px;
-  background-color: rgb(166, 203, 245);
+  background-color:
+    /* rgb(166, 203, 245); */
+    rgba(221, 217, 217, 0.829)
 }
 
 .items-list li:hover .hover {
