@@ -3,7 +3,7 @@ import { Spotify as SpotifyPlayer } from 'react-spotify-embed';
 export default function Spotify({ contentUrl }) {
 	/* console.log('Spotify url', contentUrl); */
 	return (
-		<Paper maw={600} shadow="md" p="md">
+		<Paper maw={600} shadow="md" p="md" style={{height: 450}}>
 			<Title mb={20} order={1} color='grey' size={15} align='left'>
 				🎵 Spotify Player
 			</Title>
