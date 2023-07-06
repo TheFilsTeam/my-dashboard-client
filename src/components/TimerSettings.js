@@ -4,7 +4,6 @@ import settingsService from '../services/settings.service';
 import {
 	Button,
 	Container,
-	Title,
 	Paper,
 	NumberInput,
 	Text,
@@ -49,7 +48,7 @@ export default function TimerSettings({ validateTimer, timer, timerError }) {
 		<>
 			<Container>
 				<form onSubmit={validate}>
-					<Paper withBorder shadow="md" mb={25} p={30} radius="md">
+					<Paper shadow="md" mb={25} p={30} radius="md">
 						{timerError && (
 							<Text size="sm" color="red">
 								{timerError}

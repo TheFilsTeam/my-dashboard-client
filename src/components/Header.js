@@ -179,7 +179,7 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 						mounted={opened}
 					>
 						{(styles) => (
-							<Paper className={classes.dropdown} withBorder style={styles}>
+							<Paper className={classes.dropdown} style={styles}>
 								{items}
 							</Paper>
 						)}

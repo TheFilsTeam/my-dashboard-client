@@ -66,7 +66,7 @@ export default function SignIn() {
 					</Link>
 				</Text>
 
-				<Paper withBorder shadow="md" p={30} mt={30} radius="md">
+				<Paper shadow="md" p={30} mt={30} radius="md">
 					{errorMessage && (
 						<Text size="sm" color="red">
 							{errorMessage}
