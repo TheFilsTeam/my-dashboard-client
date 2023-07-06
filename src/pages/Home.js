@@ -28,17 +28,11 @@ export default function Home({ timerService }) {
 	}, []);
 
 	return (
-		<Flex
-			mih={50}
-			gap="md"
-			justify="space-around"
-			direction="row"
-			wrap="wrap"
-		>
+		<Flex mih={50} gap="md" justify="space-around" direction="row" wrap="wrap">
 			<PomodoroControls timerService={timerService} timers={settings?.timers} />
 			<ToDoList />
-			<Spotify contentUrl={settings?.spotifyContent} />
 			<CowSay />
+			<Spotify contentUrl={settings?.spotifyContent} />
 		</Flex>
 	);
 }
