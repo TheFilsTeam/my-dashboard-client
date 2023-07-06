@@ -1,14 +1,11 @@
-// var cowsay = require("cowsay");
-// import cowsay from 'cowsay-browser';
-// import cowsay from 'cowsay-browser';
-
-import { Button, Paper, Title } from '@mantine/core';
+import { Button, NavLink, Paper, Title } from '@mantine/core';
 import { useState } from 'react';
 import backendApi from '../services/backendApi.service';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
-export default function CowSay() {
-	const [thought, setThought] = useState('Wait! The cow will say something...');
-	// useEffect(getNewThought, []);
+export default function CowSay({friends}) {
+	const [thought, setThought] = useState(null);
 
 	function getNewThought(url) {
 		backendApi
@@ -28,12 +25,14 @@ export default function CowSay() {
 				🐮💬
 			</Title>
 			<Button onClick={() => getNewThought('/api/utils/cowsay')} m={10}>
-				New prediction
+				Ask for help!
 			</Button>
 			<Button onClick={() => getNewThought('/api/utils/cowgroup')}>
 				Wedding time!
 			</Button>
-			<pre style={{ textAlign: 'left' }}>{thought}</pre>
+			{thought && <pre style={{ textAlign: 'left' }}>{thought}</pre>}
+			{!thought && <pre style={{ textAlign: 'left' }}>Wait! The cow will say something... </pre>}
+			{!thought && !friends && <p>No friends configured. Please configure it in the <Link to="./settings">settings</Link></p>}
 		</Paper>
 	);
 }

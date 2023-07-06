@@ -31,7 +31,7 @@ export default function Home({ timerService }) {
 		<Flex mih={50} gap="md" justify="space-around" direction="row" wrap="wrap">
 			<PomodoroControls timerService={timerService} timers={settings?.timers} />
 			<ToDoList />
-			<CowSay />
+			<CowSay friends={settings?.friends} />
 			<Spotify contentUrl={settings?.spotifyContent} />
 		</Flex>
 	);

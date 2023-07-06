@@ -135,14 +135,9 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 			})}
 			onClick={(event) => {
 				event.preventDefault();
-				if (link.label === 'Logout') {
-					close();
-					logOutUser();
-				} else {
-					setActive(link.link);
-					navigate(link.link);
-					close();
-				}
+				setActive(link.link);
+				navigate(link.link);
+				close();
 			}}
 		>
 			{link.label}
