@@ -126,10 +126,6 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 	const { user, logOutUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	/* useEffect(() => {
-		navigate(active);
-	}, []); */
-
 	const items = links.map((link) => (
 		<a
 			key={link.label}
