@@ -10,7 +10,7 @@ import {
 import { useForm } from '@mantine/form';
 import settingsService from '../services/settings.service';
 import { useEffect, useState } from 'react';
-import { IconTrash, IconEdit } from '@tabler/icons-react';
+import { IconTrash, IconEdit, IconHelpHexagon } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import TimerSettings from '../components/TimerSettings';
 
@@ -218,7 +218,7 @@ export default function Settings() {
 										wrap="wrap"
 									>
 										<Paper shadow="md">
-											<h2>⏱️ Timers</h2>
+											<h2>⏱️ Timers / 🍅 Pomodoro <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique"><IconHelpHexagon size={18} /></a> </h2>
 											{timerError && (
 												<Text size="sm" color="red">
 													{timerError}

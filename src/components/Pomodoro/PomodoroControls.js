@@ -15,7 +15,7 @@ export default function PomodoroControls({ timerService, timers }) {
 	return (
 		<Paper maw={600} shadow="md" p="md">
 			<Title order={1} color="grey" size={15} align="left">
-				⏱️ Timer
+				⏱️ Timer / 🍅 Pomodoro 
 			</Title>
 			<Flex
 				mih={50}
