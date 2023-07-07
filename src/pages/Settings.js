@@ -190,7 +190,6 @@ export default function Settings() {
 									name="spotifyContent"
 									placeholder="a spotify playlist url"
 									{...form.getInputProps('spotifyContent')}
-									required
 								/>
 								{playlistId && (
 									<a
