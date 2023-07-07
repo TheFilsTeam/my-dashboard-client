@@ -1,6 +1,6 @@
 import React from 'react';
 import { RingProgress, Text } from '@mantine/core';
-import { TimerStatus } from '../../services/timer.service';
+import { TimerStatus, TimerType } from '../../services/timer.service';
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
 
 export default function CircleTimerProgress({ timerService }) {
@@ -32,7 +32,7 @@ export default function CircleTimerProgress({ timerService }) {
 			sections={[
 				{
 					value: lastPercents,
-					color: 'purple',
+					color: timerService.timerType === TimerType.Break ? 'darkgreen' : 'darkred',
 				},
 				{
 					value: lastSeconds === timerService.remainingSeconds ? 0 : remainingPercent - lastPercents,
