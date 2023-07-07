@@ -71,24 +71,24 @@ class TimerService {
 				: TimerStatus.Paused;
 
 		this.setTimerStatus(this.timerStatus);
-
-		if (this.timerType === TimerType.Break) {
-			this.timerType = TimerType.Work;
-		} else if (this.timerType === TimerType.Work) {
-			this.timerType = TimerType.Break;
-		}
-	};	
+	};
 
 	finishedTimer = () => {
-		const message = this.timerType === TimerType.Break ? 'I hope you had a good break...💪' : 'Good work session!👍';
+		const message =
+			this.timerType === TimerType.Break
+				? 'I hope you had a good break...💪'
+				: 'Good work session!👍';
 		if (Notification.permission === 'granted') {
-			let options = this.timerType === TimerType.Break ? {
-				body: '⚒️ Now it\'s time to focus! ⚒️',
-				icon: './hourglass.png',
-			} : {
-				body: '🏖️ Please take a break! 🏖️',
-				icon: './hourglass.png',
-			};
+			let options =
+				this.timerType === TimerType.Break
+					? {
+							body: "⚒️ Now it's time to focus! ⚒️",
+							icon: './hourglass.png',
+					  }
+					: {
+							body: '🏖️ Please take a break! 🏖️',
+							icon: './hourglass.png',
+					  };
 			new Notification(message, options);
 		} else {
 			alert(message);
@@ -107,7 +107,7 @@ class TimerService {
 	};
 
 	getStatus = () => this.timerStatus;
-	getFriendlyType = () => this.timerType === TimerType.Work ? "⚒️" : "🏖️";
+	getFriendlyType = () => (this.timerType === TimerType.Work ? '⚒️' : '🏖️');
 
 	trackElapsedTime = () => {
 		useEffect(() => {
