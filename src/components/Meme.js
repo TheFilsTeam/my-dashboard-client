@@ -6,6 +6,10 @@ export default function Meme() {
 	const [meme, setMeme] = useState({});
 
 	function getNewThought() {
+		setMeme({
+			url: 'https://fakeimg.pl/600x400?text=Meme+in+progress...',
+			title: '...',
+		});
 		backendApi
 			.get('/api/utils/meme')
 			.then((response) => {
