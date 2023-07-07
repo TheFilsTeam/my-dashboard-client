@@ -6,6 +6,8 @@ import {
 	Text,
 	Container,
 	Button,
+	Group,
+	Image,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -47,7 +49,29 @@ export default function SignIn() {
 			});
 	};
 
+	const size = 50;
 	return (
+		<>
+		<div style={{display:"flex", justifyContent:"center"}}>
+			<Group spacing={5} mt={50} align="center">
+				<Image width={size} height={size} src="./android-chrome-512x512.png" />
+				<Text mr={20}
+				sx={(theme) => ({
+					fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+					fontWeight: 900,
+					fontSize: size,
+				})}>Focus Dashboard</Text>
+			</Group>
+		</div>
+		<div style={{display:"flex", justifyContent:"center"}}>
+			<Group spacing={5} align="center">
+				<Text mr={20}
+				sx={(theme) => ({
+					fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+					fontSize: 16,
+				})} color='grey'>All you need to get your work done.</Text>
+			</Group>
+		</div>
 		<Container size={520} my={60}>
 			<form onSubmit={signIn}>
 				<Title
@@ -94,5 +118,6 @@ export default function SignIn() {
 				</Paper>
 			</form>
 		</Container>
+		</>
 	);
 }
