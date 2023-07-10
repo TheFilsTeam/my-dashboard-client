@@ -151,3 +151,31 @@ div.wall {
   width: var(--player-size);
   height: var(--player-size);
 }
+
+#music-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hoverme {
+  padding: 15px;
+  margin: auto;
+  position: relative;
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hoverme:hover {
+  background: rgba(246, 246, 246, 0.3);
+}
+
+.hoverme:hover > .pop {
+  display: block;
+}
+
+.pop {
+  display: none;
+  margin: auto;
+}

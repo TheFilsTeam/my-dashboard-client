@@ -16,11 +16,18 @@ import { Whiteboard } from 'react-whiteboard-pdf';
 import ThemeProvider from './context/mantineTheme.context';
 
 function App() {
+	const [spotifyUrl, setSpotifyUrl] = useState("https://open.spotify.com/playlist/0phnQZXFbsLfC0nuYjrFTi");
 	const [timerStatus, setTimerStatus] = useState(TimerStatus.Stopped);
 	const [remainingSeconds, setRemainingSeconds] = useState(0);
 	const [timerService, setTimerService] = useState(
 		new TimerService(setTimerStatus, setRemainingSeconds)
 	);
+
+	const loadNewSpotifyPlaylist = (playlistUrl) => {
+		if (playlistUrl !== spotifyUrl) {
+			setSpotifyUrl(playlistUrl);
+		}
+	}
 
 	timerService.trackElapsedTime();
 	console.log('timer type: ', timerService.timerType);
@@ -49,12 +56,12 @@ function App() {
 						path="/"
 						element={
 							<IsPrivate>
-								<HeaderResponsive timerService={timerService} />
+								<HeaderResponsive timerService={timerService} spotifyUrl={spotifyUrl}  />
 							</IsPrivate>
 						}
 					>
-						<Route path="/" element={<Home timerService={timerService} />} />
-						<Route path="/settings" element={<Settings />} />
+						<Route path="/" element={<Home timerService={timerService} loadNewSpotifyPlaylist={loadNewSpotifyPlaylist} />} />
+						<Route path="/settings" element={<Settings loadNewSpotifyPlaylist={loadNewSpotifyPlaylist} />} />
 						<Route path="/fun" element={<FunForBreaks />} />
 						<Route
 							path="/whiteboard"

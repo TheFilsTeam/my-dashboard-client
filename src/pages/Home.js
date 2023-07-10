@@ -6,7 +6,7 @@ import settingsService from '../services/settings.service';
 import PomodoroControls from '../components/Pomodoro/PomodoroControls';
 import CowSay from '../components/CowSay';
 
-export default function Home({ timerService }) {
+export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 	// console.log("timerService props in Home", props.timerService);
 	const [settings, setSettings] = useState({});
 
@@ -19,6 +19,7 @@ export default function Home({ timerService }) {
 				const settings = response.data;
 				// console.log("settings", settings);
 				setSettings(settings);
+				loadNewSpotifyPlaylist(settings?.spotifyContent);
 			})
 			.catch((e) => {
 				const errorDescription = e.response.data.message;
@@ -32,7 +33,7 @@ export default function Home({ timerService }) {
 			<PomodoroControls timerService={timerService} timers={settings?.timers} />
 			<ToDoList />
 			<CowSay friends={settings?.friends} />
-			<Spotify contentUrl={settings?.spotifyContent} />
+			{/* <Spotify contentUrl={settings?.spotifyContent} /> */}
 		</Flex>
 	);
 }

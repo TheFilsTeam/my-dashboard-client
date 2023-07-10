@@ -14,7 +14,7 @@ import { IconTrash, IconEdit, IconHelpHexagon } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import TimerSettings from '../components/TimerSettings';
 
-export default function Settings() {
+export default function Settings({loadNewSpotifyPlaylist}) {
 	const [email, setEmail] = useState('');
 	const [timers, setTimers] = useState([]);
 	const [opened, { open, close }] = useDisclosure(false);
@@ -70,6 +70,7 @@ export default function Settings() {
 			.then((response) => {
 				console.log('saved', response.data);
 				setSettingsSuccess('Settings updated successfully');
+				loadNewSpotifyPlaylist(form.values.spotifyContent);
 			})
 			.catch((e) => {
 				const errorDescription = e.response.data.message;

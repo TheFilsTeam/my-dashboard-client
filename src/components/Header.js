@@ -18,6 +18,7 @@ import { AuthContext } from '../context/auth.context';
 import TimerBar from './Pomodoro/TimerBar';
 import { TimerStatus } from '../services/timer.service';
 import { IconLogout } from '@tabler/icons-react';
+import { Spotify as SpotifyPlayer } from 'react-spotify-embed';
 
 const HEADER_HEIGHT = rem(60);
 
@@ -119,7 +120,7 @@ const links = [
 	},
 ];
 
-export function HeaderResponsive({ timerService, timerTotal }) {
+export function HeaderResponsive({ timerService, timerTotal, spotifyUrl }) {
 	const [opened, { toggle, close }] = useDisclosure(false);
 
 	const [active, setActive] = useState(window.location.pathname);
@@ -178,6 +179,12 @@ export function HeaderResponsive({ timerService, timerTotal }) {
 						)}
 					</Transition>
 					<Group spacing={5}></Group>
+					<div id="music-player" className='hoverme'>
+						<Image width={32} height={32} src="./spotify.png" />
+						<div class="pop">
+							<SpotifyPlayer link={spotifyUrl} />
+						</div>
+					</div>
 					<Group spacing={5}>
 						<span>
 							{timerService.timerStatus === TimerStatus.InProgress &&
