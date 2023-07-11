@@ -16,7 +16,9 @@ import { Whiteboard } from 'react-whiteboard-pdf';
 import ThemeProvider from './context/mantineTheme.context';
 
 function App() {
-	const [spotifyUrl, setSpotifyUrl] = useState("https://open.spotify.com/playlist/0phnQZXFbsLfC0nuYjrFTi");
+	const [spotifyUrl, setSpotifyUrl] = useState(
+		'https://open.spotify.com/playlist/0phnQZXFbsLfC0nuYjrFTi'
+	);
 	const [timerStatus, setTimerStatus] = useState(TimerStatus.Stopped);
 	const [remainingSeconds, setRemainingSeconds] = useState(0);
 	const [timerService, setTimerService] = useState(
@@ -27,7 +29,7 @@ function App() {
 		if (playlistUrl !== spotifyUrl) {
 			setSpotifyUrl(playlistUrl);
 		}
-	}
+	};
 
 	timerService.trackElapsedTime();
 	console.log('timer type: ', timerService.timerType);
@@ -35,6 +37,7 @@ function App() {
 	return (
 		<div className="App">
 			<ThemeProvider timerService={timerService}>
+				<HeaderResponsive timerService={timerService} spotifyUrl={spotifyUrl} />
 				<Routes>
 					<Route
 						path="/login"
@@ -52,27 +55,36 @@ function App() {
 							</IsAnon>
 						}
 					/>
+
 					<Route
 						path="/"
 						element={
+							<Home
+								timerService={timerService}
+								loadNewSpotifyPlaylist={loadNewSpotifyPlaylist}
+							/>
+						}
+					/>
+
+					<Route
+						path="/settings"
+						element={
 							<IsPrivate>
-								<HeaderResponsive timerService={timerService} spotifyUrl={spotifyUrl}  />
+								<Settings loadNewSpotifyPlaylist={loadNewSpotifyPlaylist} />
 							</IsPrivate>
 						}
-					>
-						<Route path="/" element={<Home timerService={timerService} loadNewSpotifyPlaylist={loadNewSpotifyPlaylist} />} />
-						<Route path="/settings" element={<Settings loadNewSpotifyPlaylist={loadNewSpotifyPlaylist} />} />
-						<Route path="/fun" element={<FunForBreaks />} />
-						<Route
-							path="/whiteboard"
-							element={
-								<div style={{ width: '100%', height: '90vh' }}>
-									{' '}
-									<Whiteboard />
-								</div>
-							}
-						/>
-					</Route>
+					/>
+
+					<Route path="/fun" element={<FunForBreaks />} />
+					<Route
+						path="/whiteboard"
+						element={
+							<div style={{ width: '100%', height: '90vh' }}>
+								{' '}
+								<Whiteboard />
+							</div>
+						}
+					/>
 				</Routes>
 			</ThemeProvider>
 		</div>

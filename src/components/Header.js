@@ -19,6 +19,8 @@ import TimerBar from './Pomodoro/TimerBar';
 import { TimerStatus } from '../services/timer.service';
 import { IconLogout } from '@tabler/icons-react';
 import { Spotify as SpotifyPlayer } from 'react-spotify-embed';
+/* import Home from '../pages/Home'; */
+import Home from './../pages/Home';
 
 const HEADER_HEIGHT = rem(60);
 
@@ -120,11 +122,16 @@ const links = [
 	},
 ];
 
-export function HeaderResponsive({ timerService, timerTotal, spotifyUrl }) {
+export function HeaderResponsive({
+	timerService,
+	timerTotal,
+	loadNewSpotifyPlaylist,
+	spotifyUrl,
+}) {
 	const [opened, { toggle, close }] = useDisclosure(false);
-
 	const [active, setActive] = useState(window.location.pathname);
 	const { classes, cx } = useStyles();
+
 	const { user, logOutUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 
@@ -179,7 +186,7 @@ export function HeaderResponsive({ timerService, timerTotal, spotifyUrl }) {
 						)}
 					</Transition>
 					<Group spacing={5}></Group>
-					<div id="music-player" className='hoverme'>
+					<div id="music-player" className="hoverme">
 						<Image width={32} height={32} src="./spotify.png" />
 						<div class="pop">
 							<SpotifyPlayer link={spotifyUrl} />
@@ -192,7 +199,13 @@ export function HeaderResponsive({ timerService, timerTotal, spotifyUrl }) {
 									' | '}
 						</span>
 						<span>
-							Welcome, <i>{user.name}</i>
+							{user ? (
+								<div>
+									Welcome, <i>{user.name}</i>
+								</div>
+							) : (
+								<div>Login or create an account</div>
+							)}
 						</span>
 						<a
 							href="/logout"
@@ -208,36 +221,10 @@ export function HeaderResponsive({ timerService, timerTotal, spotifyUrl }) {
 						</a>
 					</Group>
 				</Flex>
-				{/* <Container className={classes.header}>
-					<Group spacing={5} className={classes.links}>
-						{items}
-					</Group>
-
-					<Burger
-						opened={opened}
-						onClick={toggle}
-						className={classes.burger}
-						size="sm"
-					/>
-
-					<Transition
-						transition="pop-top-right"
-						duration={200}
-						mounted={opened}
-					>
-						{(styles) => (
-							<Paper className={classes.dropdown} withBorder style={styles}>
-								{items}
-							</Paper>
-						)}
-					</Transition>
-				</Container> */}
 				<TimerBar timerService={timerService} TimerStatus={TimerStatus} />
 			</Header>
 
-			<Container p="lg" m={0} fluid>
-				<Outlet />
-			</Container>
+			<Container p="lg" m={0} fluid></Container>
 		</>
 	);
 }
