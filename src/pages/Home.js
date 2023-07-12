@@ -59,6 +59,11 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 	useEffect(() => {
 		Notification.requestPermission();
 
+		if (!localStorage.getItem('authToken')) {
+			console.log("User not loggued");
+			return;
+		}
+
 		settingsService
 			.getSettings()
 			.then((response) => {
@@ -68,9 +73,9 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 				loadNewSpotifyPlaylist(settings?.spotifyContent);
 			})
 			.catch((e) => {
-				const errorDescription = e.response.data.message;
+				// const errorDescription = e.response.data.message;
 				// setErrorMessage(errorDescription);
-				console.error(errorDescription);
+				console.error("Error getting user settings", e);
 			});
 	}, []);
 
