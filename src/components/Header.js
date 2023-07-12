@@ -13,7 +13,7 @@ import {
 	Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import TimerBar from './Pomodoro/TimerBar';
 import { TimerStatus } from '../services/timer.service';
@@ -202,7 +202,10 @@ export function HeaderResponsive({
 									Welcome, <i>{user.name}</i>
 								</div>
 							) : (
-								<div>Login or create an account</div>
+								<div>
+									<Link to={'/login'}>Login</Link> or{' '}
+									<Link to={'/create-account'}>create</Link> an account
+								</div>
 							)}
 						</span>
 						<a
