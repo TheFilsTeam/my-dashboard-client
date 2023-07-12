@@ -202,24 +202,26 @@ export function HeaderResponsive({
 									Welcome, <i>{user.name}</i>
 								</div>
 							) : (
-								<div>
+								<Text mr={20}>
 									<Link to={'/login'}>Login</Link> or{' '}
 									<Link to={'/create-account'}>create</Link> an account
-								</div>
+								</Text>
 							)}
 						</span>
-						<a
-							href="/logout"
-							className={cx(classes.link)}
-							title="Logout"
-							onClick={(event) => {
-								event.preventDefault();
-								close();
-								logOutUser();
-							}}
-						>
-							<IconLogout />
-						</a>
+						{user && (
+							<a
+								href="/logout"
+								className={cx(classes.link)}
+								title="Logout"
+								onClick={(event) => {
+									event.preventDefault();
+									close();
+									logOutUser();
+								}}
+							>
+								<IconLogout />
+							</a>
+						)}
 					</Group>
 				</Flex>
 				<TimerBar timerService={timerService} TimerStatus={TimerStatus} />
