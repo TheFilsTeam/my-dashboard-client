@@ -1,10 +1,10 @@
-import { Button, NavLink, Paper, Title } from '@mantine/core';
+import { Button, NavLink, Paper, Text, Title } from '@mantine/core';
 import { useState } from 'react';
 import backendApi from '../services/backendApi.service';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
-export default function CowSay({friends}) {
+export default function CowSay({ friends }) {
 	const [thought, setThought] = useState(null);
 
 	function getNewThought(url) {
@@ -31,8 +31,17 @@ export default function CowSay({friends}) {
 				Wedding time!
 			</Button>
 			{thought && <pre style={{ textAlign: 'left' }}>{thought}</pre>}
-			{!thought && <pre style={{ textAlign: 'left' }}>Wait! The cow will say something... </pre>}
-			{!thought && !friends && <p>No friends configured. Please configure it in the <Link to="./settings">settings</Link></p>}
+			{!thought && !friends && (
+				<Text fz={'sm'}>
+					No friends configured. Please configure it in the{' '}
+					{/* <Link to="./settings"> */}settings{/* </Link> */}
+				</Text>
+			)}
+			{!thought && (
+				<pre style={{ textAlign: 'left' }}>
+					Wait! The cow will say something...{' '}
+				</pre>
+			)}
 		</Paper>
 	);
 }
