@@ -16,7 +16,11 @@ export default function PomodoroControls({ timerService, timers }) {
 			<Title order={1} color="grey" size={15} align="left">
 				⏱️ Timer / 🍅 Pomodoro
 			</Title>
-			{!user && <Text mt={10}>Login to customize timers in the settings</Text>}
+			{!user && (
+				<Text fz={'sm'} mt={10}>
+					Login to customize timers in the settings
+				</Text>
+			)}
 			<Flex
 				mih={50}
 				gap="md"
