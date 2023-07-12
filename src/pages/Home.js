@@ -10,6 +10,53 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 	// console.log("timerService props in Home", props.timerService);
 	const [settings, setSettings] = useState({});
 
+	console.log(settings.timers);
+
+	const defaultTimers = [
+		/* {
+			_id: null,
+			type: 'Work',
+			duration: 1800,
+			owner: null,
+			__v: 0,
+		}, */
+		{
+			_id: null,
+			type: 'Work',
+			duration: 2700,
+			owner: null,
+			__v: 0,
+		},
+		{
+			_id: null,
+			type: 'Break',
+			duration: 60,
+			owner: null,
+			__v: 0,
+		},
+		{
+			_id: null,
+			type: 'Break',
+			duration: 360,
+			owner: null,
+			__v: 0,
+		},
+		/* {
+			_id: null,
+			type: 'Break',
+			duration: 480,
+			owner: null,
+			__v: 0,
+		}, */
+		{
+			_id: null,
+			type: 'Break',
+			duration: 720,
+			owner: null,
+			__v: 0,
+		},
+	];
+
 	useEffect(() => {
 		Notification.requestPermission();
 
@@ -30,7 +77,10 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 
 	return (
 		<Flex mih={50} gap="md" justify="space-around" direction="row" wrap="wrap">
-			<PomodoroControls timerService={timerService} timers={settings?.timers} />
+			<PomodoroControls
+				timerService={timerService}
+				timers={settings?.timers || defaultTimers}
+			/>
 			<ToDoList />
 			<CowSay friends={settings?.friends} />
 			{/* <Spotify contentUrl={settings?.spotifyContent} /> */}

@@ -4,10 +4,6 @@ import { TimerStatus } from '../../services/timer.service';
 import CircleTimerProgress from './CircleTimerProgress';
 
 export default function PomodoroControls({ timerService, timers }) {
-	// console.log("timerService props in PomodoroControls", timerService);
-	/* const [minutes, setMinutes] = useState(0);
-	const [seconds, setSeconds] = useState(0); */
-
 	if (!timerService) {
 		return <div></div>;
 	}
@@ -15,7 +11,7 @@ export default function PomodoroControls({ timerService, timers }) {
 	return (
 		<Paper maw={600} shadow="md" p="md">
 			<Title order={1} color="grey" size={15} align="left">
-				⏱️ Timer / 🍅 Pomodoro 
+				⏱️ Timer / 🍅 Pomodoro
 			</Title>
 			<Flex
 				mih={50}
