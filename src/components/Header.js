@@ -13,14 +13,12 @@ import {
 	Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import TimerBar from './Pomodoro/TimerBar';
 import { TimerStatus } from '../services/timer.service';
 import { IconLogout } from '@tabler/icons-react';
 import { Spotify as SpotifyPlayer } from 'react-spotify-embed';
-/* import Home from '../pages/Home'; */
-import Home from './../pages/Home';
 
 const HEADER_HEIGHT = rem(60);
 
