@@ -1,6 +1,5 @@
 import { Flex } from '@mantine/core';
 import ToDoList from '../components/ToDoList';
-import Spotify from '../components/Spotify';
 import { useEffect, useState } from 'react';
 import settingsService from '../services/settings.service';
 import PomodoroControls from '../components/Pomodoro/PomodoroControls';
@@ -83,7 +82,6 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 			/>
 			<ToDoList />
 			<CowSay friends={settings?.friends} />
-			{/* <Spotify contentUrl={settings?.spotifyContent} /> */}
 		</Flex>
 	);
 }
