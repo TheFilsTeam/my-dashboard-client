@@ -1,11 +1,13 @@
-import { Paper, Checkbox, Input, Title } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { Paper, Checkbox, Input, Title, Text } from '@mantine/core';
+import { useContext, useEffect, useState } from 'react';
 import taskService from '../services/task.service';
 import { IconTrash } from '@tabler/icons-react';
+import { AuthContext } from '../context/auth.context';
 
 export default function ToDoList() {
 	const [title, setTitle] = useState('');
 	const [tasks, setTasks] = useState([]);
+	const { user, logOutUser } = useContext(AuthContext);
 
 	useEffect(() => {
 		taskService
@@ -50,18 +52,24 @@ export default function ToDoList() {
 			<Title order={1} color="grey" size={15} align="left">
 				📃 To-do list
 			</Title>
-			<Input
-				id="add-task"
-				label="Add a new task"
-				placeholder="Title of the new task"
-				required
-				// classNames={classes}
-				value={title}
-				onChange={(e) => setTitle(e.currentTarget.value)}
-				onKeyUp={(e) => handleKeyEvent(e)}
-				mt="md"
-				autoComplete="nope"
-			/>
+			{user ? (
+				<Input
+					id="add-task"
+					label="Add a new task"
+					placeholder="Title of the new task"
+					required
+					// classNames={classes}
+					value={title}
+					onChange={(e) => setTitle(e.currentTarget.value)}
+					onKeyUp={(e) => handleKeyEvent(e)}
+					mt="md"
+					autoComplete="nope"
+				/>
+			) : (
+				<Text mt={20} fz={'sm'}>
+					Feature only available for registered users
+				</Text>
+			)}
 
 			<ul>
 				{tasks.map((t) => (
