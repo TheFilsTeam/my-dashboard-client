@@ -52,72 +52,85 @@ export default function SignIn() {
 	const size = 50;
 	return (
 		<>
-		<div style={{display:"flex", justifyContent:"center"}}>
-			<Group spacing={5} mt={50} align="center">
-				<Image width={size} height={size} src="./android-chrome-512x512.png" />
-				<Text mr={20}
-				sx={(theme) => ({
-					fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-					fontWeight: 900,
-					fontSize: size,
-				})}>Focus Dashboard</Text>
-			</Group>
-		</div>
-		<div style={{display:"flex", justifyContent:"center"}}>
-			<Group spacing={5} align="center">
-				<Text mr={20}
-				sx={(theme) => ({
-					fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-					fontSize: 16,
-				})} color='grey'>All you need to get your work done.</Text>
-			</Group>
-		</div>
-		<Container size={520} my={60}>
-			<form onSubmit={signIn}>
-				<Title
-					align="center"
-					sx={(theme) => ({
-						fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-						fontWeight: 900,
-					})}
-				>
-					Welcome back!
-				</Title>
-				<Text color="dimmed" size="sm" align="center" mt={5}>
-					Do not have an account yet?{' '}
-					<Link style={{ textDecoration: 'none' }} to="/create-account">
-						Create account
-					</Link>
-				</Text>
-
-				<Paper shadow="md" p={30} mt={30} radius="md">
-					{errorMessage && (
-						<Text size="sm" color="red">
-							{errorMessage}
-						</Text>
-					)}
-					<TextInput
-						label="Email"
-						name="email"
-						type="email"
-						placeholder="your@email.com"
-						{...form.getInputProps('email')}
-						required
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+				<Group spacing={5} mt={0} align="center">
+					<Image
+						width={size}
+						height={size}
+						src="./android-chrome-512x512.png"
 					/>
-					<PasswordInput
-						label="Password"
-						placeholder="Your password"
-						{...form.getInputProps('password')}
-						required
-						mt="md"
-					/>
+					<Text
+						mr={20}
+						sx={(theme) => ({
+							fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+							fontWeight: 900,
+							fontSize: size,
+						})}
+					>
+						Focus Dashboard
+					</Text>
+				</Group>
+			</div>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+				<Group spacing={5} align="center">
+					<Text
+						mr={20}
+						sx={(theme) => ({
+							fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+							fontSize: 16,
+						})}
+						color="grey"
+					>
+						All you need to get your work done.
+					</Text>
+				</Group>
+			</div>
+			<Container size={520} my={60}>
+				<form onSubmit={signIn}>
+					<Title
+						align="center"
+						sx={(theme) => ({
+							fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+							fontWeight: 500,
+						})}
+					>
+						Login to access all functionalities
+					</Title>
+					<Text color="dimmed" size="sm" align="center" mt={5}>
+						Do not have an account yet?{' '}
+						<Link style={{ textDecoration: 'none' }} to="/create-account">
+							Create account
+						</Link>
+					</Text>
 
-					<Button fullWidth mt="xl" type="submit">
-						Sign in
-					</Button>
-				</Paper>
-			</form>
-		</Container>
+					<Paper shadow="md" p={30} mt={30} radius="md">
+						{errorMessage && (
+							<Text size="sm" color="red">
+								{errorMessage}
+							</Text>
+						)}
+						<TextInput
+							label="Email"
+							name="email"
+							type="email"
+							placeholder="your@email.com"
+							{...form.getInputProps('email')}
+							required
+						/>
+						<PasswordInput
+							label="Password"
+							placeholder="Your password"
+							{...form.getInputProps('password')}
+							required
+							mt="md"
+						/>
+
+						<Button fullWidth mt="xl" type="submit">
+							Sign in
+						</Button>
+					</Paper>
+				</form>
+			</Container>
 		</>
 	);
 }
