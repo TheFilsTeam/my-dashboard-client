@@ -22,21 +22,21 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 		{
 			_id: null,
 			type: 'Work',
-			duration: 2700,
+			duration: 25 * 60,
 			owner: null,
 			__v: 0,
 		},
 		{
 			_id: null,
 			type: 'Break',
-			duration: 60,
+			duration: 5 * 60,
 			owner: null,
 			__v: 0,
 		},
 		{
 			_id: null,
 			type: 'Break',
-			duration: 360,
+			duration: 8 * 60,
 			owner: null,
 			__v: 0,
 		},
@@ -50,7 +50,7 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 		{
 			_id: null,
 			type: 'Break',
-			duration: 720,
+			duration: 12 * 60,
 			owner: null,
 			__v: 0,
 		},
