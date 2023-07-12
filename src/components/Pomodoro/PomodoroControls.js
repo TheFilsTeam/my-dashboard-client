@@ -1,9 +1,12 @@
-import { Flex, Button, Paper, Title } from '@mantine/core';
-import React from 'react';
+import { Flex, Button, Paper, Title, Text } from '@mantine/core';
+import React, { useContext } from 'react';
 import { TimerStatus } from '../../services/timer.service';
 import CircleTimerProgress from './CircleTimerProgress';
+import { AuthContext } from '../../context/auth.context';
 
 export default function PomodoroControls({ timerService, timers }) {
+	const { user, logOutUser } = useContext(AuthContext);
+
 	if (!timerService) {
 		return <div></div>;
 	}
@@ -13,6 +16,7 @@ export default function PomodoroControls({ timerService, timers }) {
 			<Title order={1} color="grey" size={15} align="left">
 				⏱️ Timer / 🍅 Pomodoro
 			</Title>
+			{!user && <Text mt={10}>Login to customize timers in the settings</Text>}
 			<Flex
 				mih={50}
 				gap="md"
