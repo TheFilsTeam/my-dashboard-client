@@ -192,11 +192,15 @@ export default function Settings({loadNewSpotifyPlaylist}) {
 									placeholder="a spotify playlist url"
 									{...form.getInputProps('spotifyContent')}
 								/>
+								<p title='To ensure a good experience with the Spotify player (i.e. not listening only songs extracts), you should ensure to:
+- be loggued in spotify website (even with a free account)
+- visit spotify website regularly
+- let the playlist play from beginning...'>ℹ️</p>
 								{playlistId && (
 									<a
 										href={`https://stevenaleong.com/tools/spotifyplaylistrandomizer?shuffle=${playlistId}`}
 									>
-										Randomize playlist
+										🔃 Randomize playlist
 									</a>
 								)}
 							</section>
