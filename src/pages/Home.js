@@ -70,7 +70,10 @@ export default function Home({ timerService, loadNewSpotifyPlaylist }) {
 				const settings = response.data;
 				// console.log("settings", settings);
 				setSettings(settings);
-				loadNewSpotifyPlaylist(settings?.spotifyContent);
+				/* loadNewSpotifyPlaylist(settings?.spotifyContent); */
+				if (settings?.spotifyContent) {
+  					loadNewSpotifyPlaylist(settings.spotifyContent);
+				}
 			})
 			.catch((e) => {
 				// const errorDescription = e.response.data.message;
