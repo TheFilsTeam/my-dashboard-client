@@ -12,8 +12,25 @@ import Home from './pages/Home';
 import { TimerService, TimerStatus } from './services/timer.service';
 import { HeaderResponsive } from './components/Header';
 import FunForBreaks from './pages/FunForBreaks';
-import { Excalidraw, WelcomeScreen } from '@excalidraw/excalidraw';
+import { Excalidraw, LiveCollaborationTrigger, WelcomeScreen } from '@excalidraw/excalidraw';
 import ThemeProvider from './context/mantineTheme.context';
+// import initialData from "./initialExcalidrawData";
+
+// Load already downloaded library from https://libraries.excalidraw.com
+// and append '.json' to the file to be able to load it
+import webLib from "./excalidrawLibraries/html-css-js-icons.excalidrawlib.json";
+import itLib from "./excalidrawLibraries/it-icons.excalidrawlib.json";
+import uiLib from "./excalidrawLibraries/universal-ui-kit.excalidrawlib.json";
+import jsTypesLib from "./excalidrawLibraries/types-and-values-in-javascript.excalidrawlib.json";
+import githubLib from "./excalidrawLibraries/github-icons.excalidrawlib.json";
+import uxLib from "./excalidrawLibraries/basic-ux-wireframing-elements.excalidrawlib.json";
+import shapesLib from "./excalidrawLibraries/basic-shapes.excalidrawlib.json";
+import devopsLib from "./excalidrawLibraries/dev_ops.excalidrawlib.json";
+import formsLib from "./excalidrawLibraries/forms.excalidrawlib.json";
+import frontLib from "./excalidrawLibraries/front-end-tech-and-tools.excalidrawlib.json";
+import hexaLib from "./excalidrawLibraries/hexagonal-architecture.excalidrawlib.json";
+import componentsLib from "./excalidrawLibraries/systems-design-components.excalidrawlib.json";
+const libs = [webLib, itLib, uiLib, jsTypesLib, uxLib, shapesLib, frontLib, componentsLib, formsLib, devopsLib, githubLib, hexaLib];
 
 function App() {
 	const [spotifyUrl, setSpotifyUrl] = useState(
@@ -25,6 +42,17 @@ function App() {
 		new TimerService(setTimerStatus, setRemainingSeconds)
 	);
 
+	const loadExcalidrawLibrary = (libraryContent)  => {
+	if (libraryContent.version === 1) {
+		return libraryContent.library;
+	}
+
+	if (libraryContent.version === 2) {
+		return libraryContent.libraryItems.map(e => e.elements);
+	}
+
+	console.log("version not compatible");
+}
 	const loadNewSpotifyPlaylist = (playlistUrl) => {
 		if (playlistUrl !== spotifyUrl) {
 			setSpotifyUrl(playlistUrl);
@@ -81,7 +109,7 @@ function App() {
 						element={
 							<div style={{ width: '100%', height: '90vh' }}>
 								{' '}
-								<Excalidraw>
+								<Excalidraw initialData={{ libraryItems: libs.flatMap(lib => loadExcalidrawLibrary(lib)) }} >
         							<WelcomeScreen />
       							</Excalidraw>
 							</div>
