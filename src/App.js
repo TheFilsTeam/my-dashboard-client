@@ -12,7 +12,7 @@ import Home from './pages/Home';
 import { TimerService, TimerStatus } from './services/timer.service';
 import { HeaderResponsive } from './components/Header';
 import FunForBreaks from './pages/FunForBreaks';
-import { Whiteboard } from 'react-whiteboard-pdf';
+import { Excalidraw } from '@excalidraw/excalidraw';
 import ThemeProvider from './context/mantineTheme.context';
 
 function App() {
@@ -81,7 +81,7 @@ function App() {
 						element={
 							<div style={{ width: '100%', height: '90vh' }}>
 								{' '}
-								<Whiteboard />
+								<Excalidraw />
 							</div>
 						}
 					/>
